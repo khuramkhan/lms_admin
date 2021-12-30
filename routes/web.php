@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\CourseController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -14,4 +16,14 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/',[UserController::class,'index']);
+Route::get('/',[HomeController::class,'index']);
+Route::get('users',[UserController::class,'index']);
+Route::get('course/add',[CourseController::class,'addCourse']);
+Route::post('course/add',[CourseController::class,'addCourse']);
+
+
+Route::get('courses',[CourseController::class,"index"]);
+Route::prefix('course')->group(function(){
+    Route::post('topic/save',[CourseController::class,'addTopic']);
+});
+
