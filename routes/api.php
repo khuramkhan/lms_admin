@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\Auth\UserController;
+use App\Models\Course;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -14,6 +16,14 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+Route::post('/register',[UserController::class,'register']);
+Route::post('/confirm-otp',[UserController::class,'confirmOtp']);
+Route::post('/login',[UserController::class,'login']);
+Route::post('/forgot-password',[UserController::class,'forgotPassword']);
+
+Route::middleware('auth:api')->group( function () {
+    Route::get('courses',function(){
+        return Course::all();
+    });
 });
+

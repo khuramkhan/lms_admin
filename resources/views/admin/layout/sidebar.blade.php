@@ -14,16 +14,26 @@
                 <li class=" nav-item"><a href="{{url('/')}}"><i class="ft-home"></i><span class="menu-title" data-i18n="">Dashboard</span></a>
                 </li>
             </ul>
-                {{-- <ul class="navigation navigation-main" id="main-menu-navigation" data-menu="menu-navigation">
-                    <li class=" nav-item"><a href="#"><i class="ft-globe"></i></i><span class="menu-title" data-i18n="">Product</span></a>
+                <ul class="navigation navigation-main" id="main-menu-navigation" data-menu="menu-navigation">
+                    <li class=" nav-item"><a href="#"><i class="ft-user"></i></i><span class="menu-title" data-i18n="">Users</span></a>
                         <ul class="menu-content">
-                            <li class="{{Request::url() == url('product/add') ? 'active' : ''}}"><a class="menu-item" href="{{ url('product/add') }}">Add Product</a>
+                            {{-- <li class="{{Request::url() == url('users') ? 'active' : ''}}"><a class="menu-item" href="{{ url('product/add') }}">Add Product</a> --}}
                             </li>
-                            <li class="{{Request::url() == url('product') ? 'active' : ''}}"><a class="menu-item" href="{{ url('product') }}">View Product</a>
+                                <li class="{{Request::url() == url('users') ? 'active' : ''}}"><a class="menu-item" href="{{ url('users') }}">View Users</a>
                             </li>
                         </ul>
                     </li>
-                </ul> --}}
+                </ul>
+                <ul class="navigation navigation-main" id="main-menu-navigation" data-menu="menu-navigation">
+                    <li class=" nav-item"><a href="#"><i class="ft-user"></i></i><span class="menu-title" data-i18n="">Courses</span></a>
+                        <ul class="menu-content">
+                            </li>
+                                <li class="{{Request::url() == url('courses') ? 'active' : ''}}"><a class="menu-item" href="{{ url('courses') }}">View Courses</a>
+                            </li>
+                            <li class="{{Request::url() == url('course/add') ? 'active' : ''}}"><a class="menu-item" href="{{ url('course/add') }}">Add Course</a>
+                        </ul>
+                    </li>
+                </ul>
         </div>
     </div>
     <!-- END: Main Menu-->
