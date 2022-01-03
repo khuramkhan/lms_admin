@@ -17,7 +17,7 @@ class UserController extends Controller
     {
         $validate = Validator::make($request->all(),[
             'name' => 'required|string',
-            'email' => 'required|string|email|unique:users,email,id',
+            'email' => 'required|string|email',
             'password' => 'required|string|confirmed|min:8',
             'password_confirmation' => 'required|string',
             'dob' => 'required|date',
@@ -38,7 +38,23 @@ class UserController extends Controller
         $data['status'] = 'inactive';
         $data['otp'] =  mt_rand(100000,999999);
         $data['password'] = Hash::make($request->password);
-        $user = User::create($data);
+
+        $isExist = User::where('email',$request->email)->first();
+        if($isExist){
+
+            if($isExist->status == 'active'){
+                return response()->json([
+                    'success' => false,
+                    'message' => 'User Already Exist with this Email'
+                ]);
+            }
+
+             $isExist->update($data);
+             $user = $isExist;
+        }else{
+            $user = User::create($data);
+        }
+
         $token = $user->createToken('MyApp')->accessToken;
 
         //SEND OTP MAIL
@@ -70,6 +86,14 @@ class UserController extends Controller
         }
 
         $user = User::findorfail($request->user_id);
+
+        if($user->status == 'active'){
+            return response()->json([
+                'success' => false,
+                'message' => 'User Already Active'
+            ]);
+        }
+
         if($user->otp == $request->otp){
             $user->status = 'active';
             $user->save();
@@ -93,7 +117,8 @@ class UserController extends Controller
 
         $validate = Validator::make($request->all(),[
             'email' => 'required|string|email',
-            'password' => 'required|string'
+            'password' => 'required|string',
+            'device_id' => 'required|string'
         ]);
 
         if($validate->fails()){
@@ -104,6 +129,16 @@ class UserController extends Controller
         }
 
         $user = User::where('email',$request->email)->first();
+        if(empty($user->device_id)){
+            $user->device_id = $request->device_id;
+            $user->save();
+        }elseif($user->device_id !== $request->device_id){
+            return response()->json([
+                'success' => false,
+                'Please Login with your Registered Device'
+            ]);
+        }
+
         if($user){
 
             if($user->status == 'inactive'){

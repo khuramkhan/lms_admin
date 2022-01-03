@@ -11,6 +11,6 @@ class Course extends Model
 
     public function topics()
     {
-        return $this->hasMany(CourseTopic::class);
+        return $this->hasMany(CourseTopic::class,'courseId');
     }
 }

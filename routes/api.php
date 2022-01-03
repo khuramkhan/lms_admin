@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\CourseController;
 use App\Http\Controllers\Auth\UserController;
 use App\Models\Course;
 use Illuminate\Http\Request;
@@ -22,8 +23,10 @@ Route::post('/login',[UserController::class,'login']);
 Route::post('/forgot-password',[UserController::class,'forgotPassword']);
 
 Route::middleware('auth:api')->group( function () {
-    Route::get('courses',function(){
-        return Course::all();
+    Route::get('courses',[CourseController::class,'courses']);
+    Route::prefix('course')->group(function(){
+        Route::post('/purchase',[CourseController::class,'purchaseCourse']);
     });
+    // Route::get('')
 });
 

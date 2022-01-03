@@ -7,5 +7,5 @@ use Illuminate\Database\Eloquent\Model;
 
 class CourseTopic extends Model
 {
-    protected $fillable = ['topic','courseId','videoLink'];
+    protected $fillable = ['topic','courseId','videoLink','pdf'];
 }
