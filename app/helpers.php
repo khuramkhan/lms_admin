@@ -36,5 +36,9 @@ function sendMail($to, $subject, $template)
     }
 }
 
+function removePublicFromPath($path = null){
+    return  str_replace('public/','',$path);
+}
+
 
 ?>

@@ -29,7 +29,8 @@ class User extends Authenticatable
         'otp',
         'status',
         'role',
-        'token'
+        'token',
+        'device_id'
     ];
 
     /**

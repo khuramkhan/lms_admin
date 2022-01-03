@@ -23,7 +23,7 @@
                                 {{session()->has('success') ? session()->get('success') : session()->get('error')}}
                             </div>
                         @endif
-                        <form class="form form-horizontal" action="{{ url('/course/topic/save') }}" method="POST" enctype="multipart/form-data">
+                        <form class="form form-horizontal" action="" method="POST" enctype="multipart/form-data">
                             @csrf
                             <input type="hidden" name="courseID" value="{{ $courseID }}">
                             <div class="form-body" id="topicWrapper">
@@ -36,8 +36,8 @@
                                 <div class="row" id="topic">
                                     <div class="col-md-12">
                                         <div class="form-group row">
-                                            <label class="col-md-3 label-control" for="userinput1">Topic</label>
-                                            <div class="col-md-9">
+                                            <label class="col-md-2 label-control" for="userinput1">Topic</label>
+                                            <div class="col-md-8">
                                                 <input type="text" name="topic[]"
                                                     class="form-control border-primary" placeholder="Topic" required>
                                             </div>
@@ -45,9 +45,17 @@
                                     </div>
                                     <div class="col-md-12">
                                         <div class="form-group row">
-                                            <label class="col-md-3 label-control" for="userinput1">Video Link</label>
-                                            <div class="col-md-9">
+                                            <label class="col-md-2 label-control" for="userinput1">Video Link</label>
+                                            <div class="col-md-8">
                                                <textarea name="videoLink[]" class="form-control" placeholder="Enter Comma Seprated Links"  rows="5"></textarea>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div class="form-group row">
+                                            <label class="col-md-2 label-control" for="userinput1">Pdf</label>
+                                            <div class="col-md-8">
+                                               <input type="file" name="pdf[]" class="form-control" required>
                                             </div>
                                         </div>
                                     </div>
@@ -56,7 +64,7 @@
 
                             <div class="form-actions right">
                                 <button type="submit" class="btn btn-primary">
-                                    <i class="la la-check-square-o"></i> Save
+                                    <i class="la la-check-square-o"></i> Save & Next
                                 </button>
                             </div>
                         </form>
@@ -76,8 +84,8 @@
                                     </div>
                                     <div class="col-md-12">
                                         <div class="form-group row">
-                                            <label class="col-md-3 label-control" for="userinput1">Topic</label>
-                                            <div class="col-md-9">
+                                            <label class="col-md-2 label-control" for="userinput1">Topic</label>
+                                            <div class="col-md-8">
                                                 <input type="text" name="topic[]"
                                                     class="form-control border-primary" placeholder="Topic" required>
                                             </div>
@@ -85,9 +93,17 @@
                                     </div>
                                     <div class="col-md-12">
                                         <div class="form-group row">
-                                            <label class="col-md-3 label-control" for="userinput1">Video Link</label>
-                                            <div class="col-md-9">
+                                            <label class="col-md-2 label-control" for="userinput1">Video Link</label>
+                                            <div class="col-md-8">
                                                <textarea name="videoLink[]" class="form-control" placeholder="Enter Comma Seprated Links"  rows="5"></textarea>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div class="form-group row">
+                                            <label class="col-md-2 label-control" for="userinput1">Pdf</label>
+                                            <div class="col-md-8">
+                                               <input type="file" name="pdf[]" class="form-control" required>
                                             </div>
                                         </div>
                                     </div>
