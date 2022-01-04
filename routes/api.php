@@ -27,6 +27,15 @@ Route::middleware('auth:api')->group( function () {
     Route::prefix('course')->group(function(){
         Route::post('/purchase',[CourseController::class,'purchaseCourse']);
     });
-    // Route::get('')
+    Route::prefix('user')->group(function(){
+        Route::post('wishListCourses',[CourseController::class,'userWishListCourses']);
+        Route::post('wishListCourse/add',[CourseController::class,'addUserWishListCourses']);
+        Route::post('contactUs',[UserController::class,'contactUs']);
+        Route::post('changePassword',[UserController::class,'changePassword']);
+        Route::post('purchaseHistory',[CourseController::class,'purchaseHistory']);
+        Route::post('subscriptions',[CourseController::class,'subscriptions']);
+        Route::post('updateProfile',[UserController::class,'updateProfile']);
+    });
+
 });
 

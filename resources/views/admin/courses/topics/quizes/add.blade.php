@@ -32,7 +32,7 @@
                                         <div class="form-group row">
                                             <label class="col-md-2 label-control" for="userinput1">Select Topic</label>
                                             <div class="col-md-8">
-                                                <select name="topicId" class="form-control">
+                                                <select name="topicId" class="form-control" required>
                                                     <option value="">----Select-----</option>
                                                         @foreach ($course->topics as $topic)
                                                             <option value="{{ $topic->id }}">{{ $topic->topic }}</option>
@@ -55,11 +55,17 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-md-6">
+                                    <div class="col-md-12">
                                         <div class="form-group row">
-                                            <label class="col-md-3 label-control" for="userinput1">Option(1)</label>
+                                            <label class="col-md-2 label-control" for="userinput1">Correct Option</label>
                                             <div class="col-md-8">
-                                                <input type="text" name="opt_1[]"  class="form-control">
+                                                <select name="c_opt[]" class="form-control" required>
+                                                    <option value="">----Select-----</option>
+                                                        <option value="opt_1">Option(1)</option>
+                                                        <option value="opt_2">Option(2)</option>
+                                                        <option value="opt_3">Option(3)</option>
+                                                        <option value="opt_4">Option(4)</option>
+                                                </select>
                                             </div>
                                         </div>
                                     </div>
@@ -67,23 +73,31 @@
                                         <div class="form-group row">
                                             <label class="col-md-3 label-control" for="userinput1">Option(1)</label>
                                             <div class="col-md-8">
-                                                <input type="text" name="opt_2[]"  class="form-control">
+                                                <input type="text" name="opt_1[]"  class="form-control" required>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group row">
-                                            <label class="col-md-3 label-control" for="userinput1">Option(1)</label>
+                                            <label class="col-md-3 label-control" for="userinput1">Option(2)</label>
                                             <div class="col-md-8">
-                                                <input type="text" name="opt_3[]"  class="form-control">
+                                                <input type="text" name="opt_2[]"  class="form-control" required>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group row">
-                                            <label class="col-md-3 label-control" for="userinput1">Option(1)</label>
+                                            <label class="col-md-3 label-control" for="userinput1">Option(3)</label>
                                             <div class="col-md-8">
-                                                <input type="text" name="opt_4[]"  class="form-control">
+                                                <input type="text" name="opt_3[]"  class="form-control" required>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group row">
+                                            <label class="col-md-3 label-control" for="userinput1">Option(4)</label>
+                                            <div class="col-md-8">
+                                                <input type="text" name="opt_4[]"  class="form-control" required>
                                             </div>
                                         </div>
                                     </div>
@@ -92,7 +106,7 @@
 
                             <div class="form-actions right">
                                 <button type="submit" class="btn btn-primary">
-                                    <i class="la la-check-square-o"></i> Save & Next
+                                    <i class="la la-check-square-o"></i> Save
                                 </button>
                             </div>
                         </form>
@@ -119,11 +133,17 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-md-6">
+                                    <div class="col-md-12">
                                         <div class="form-group row">
-                                            <label class="col-md-3 label-control" for="userinput1">Option(1)</label>
+                                            <label class="col-md-2 label-control" for="userinput1">Correct Option</label>
                                             <div class="col-md-8">
-                                                <input type="text" name="opt_1[]"  class="form-control">
+                                                <select name="c_opt[]" class="form-control" required>
+                                                    <option value="">----Select-----</option>
+                                                        <option value="opt_1">Option(1)</option>
+                                                        <option value="opt_2">Option(2)</option>
+                                                        <option value="opt_3">Option(3)</option>
+                                                        <option value="opt_4">Option(4)</option>
+                                                </select>
                                             </div>
                                         </div>
                                     </div>
@@ -131,23 +151,31 @@
                                         <div class="form-group row">
                                             <label class="col-md-3 label-control" for="userinput1">Option(1)</label>
                                             <div class="col-md-8">
-                                                <input type="text" name="opt_2[]"  class="form-control">
+                                                <input type="text" name="opt_1[]"  class="form-control" required>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group row">
-                                            <label class="col-md-3 label-control" for="userinput1">Option(1)</label>
+                                            <label class="col-md-3 label-control" for="userinput1">Option(2)</label>
                                             <div class="col-md-8">
-                                                <input type="text" name="opt_3[]"  class="form-control">
+                                                <input type="text" name="opt_2[]"  class="form-control" required>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group row">
-                                            <label class="col-md-3 label-control" for="userinput1">Option(1)</label>
+                                            <label class="col-md-3 label-control" for="userinput1">Option(3)</label>
                                             <div class="col-md-8">
-                                                <input type="text" name="opt_4[]"  class="form-control">
+                                                <input type="text" name="opt_3[]"  class="form-control" required>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group row">
+                                            <label class="col-md-3 label-control" for="userinput1">Option(4)</label>
+                                            <div class="col-md-8">
+                                                <input type="text" name="opt_4[]"  class="form-control" required>
                                             </div>
                                         </div>
                                     </div>

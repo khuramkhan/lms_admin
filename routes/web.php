@@ -28,8 +28,9 @@ Route::prefix('course')->as('course.')->group(function(){
     Route::prefix('/{courseID}/topic')->group(function(){
         Route::get('/add',[CourseController::class,'addTopic'])->name('addTopic');
         Route::post('/add',[CourseController::class,'addTopic']);
-        // Route::get('/addQuiz',[CourseController::class,"addQuiz"])->name('addQuiz');
-        Route::match(['get','post'], '/addQuiz',[CourseController::class,'addQuiz']);
+        Route::get('/addQuiz',[CourseController::class,"addQuiz"])->name('addQuiz');
+        Route::post('/addQuiz',[CourseController::class,"addQuiz"])->name('addQuiz.save');
+        // Route::match(['get','post'], '/addQuiz',[CourseController::class,'addQuiz']);
     });
 });
 
