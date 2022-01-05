@@ -31,7 +31,7 @@ class UserController extends Controller
         if($validate->fails()){
             return response()->json([
                 'success' => false,
-                'errors' => $validate->errors()
+                'errors' => $validate->errors()->first()
             ]);
         }
 
@@ -82,7 +82,7 @@ class UserController extends Controller
         if($validate->fails()){
             return response()->json([
                 'success' => false,
-                'errors' => $validate->errors()
+                'errors' => $validate->errors()->first()
             ]);
         }
 
@@ -126,22 +126,23 @@ class UserController extends Controller
         if($validate->fails()){
             return response()->json([
                 'success' => false,
-                'errors' => $validate->errors()
+                'errors' => $validate->errors()->first()
             ]);
         }
 
         $user = User::where('email',$request->email)->first();
-        if(empty($user->device_id)){
-            $user->device_id = $request->device_id;
-            $user->save();
-        }elseif($user->device_id !== $request->device_id){
-            return response()->json([
-                'success' => false,
-                'Please Login with your Registered Device'
-            ]);
-        }
 
         if($user){
+
+            if(empty($user->device_id)){
+                $user->device_id = $request->device_id;
+                $user->save();
+            }elseif($user->device_id !== $request->device_id){
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Please Login with your Registered Device'
+                ]);
+            }
 
             if($user->status == 'inactive'){
 
@@ -169,7 +170,7 @@ class UserController extends Controller
 
         }else{
             $success = false;
-            $message = 'Email not found';
+            $message = 'Invalid Email';
         }
 
         return response()->json([
@@ -191,7 +192,7 @@ class UserController extends Controller
         if($validate->fails()){
             return response()->json([
                 'success' => false,
-                'errors' => $validate->errors()
+                'errors' => $validate->errors()->first()
             ]);
         }
 
@@ -228,7 +229,7 @@ class UserController extends Controller
         if($validate->fails()){
             return response()->json([
                 'success' => false,
-                'errors' => $validate->errors()
+                'errors' => $validate->errors()->first()
             ]);
         }
         $data = $request->all();
@@ -252,7 +253,7 @@ class UserController extends Controller
         if($validate->fails()){
             return response()->json([
                 'success' => false,
-                'errors' => $validate->errors()
+                'errors' => $validate->errors()->first()
             ]);
         }
 
@@ -285,7 +286,7 @@ class UserController extends Controller
         if($validate->fails()){
             return response()->json([
                 'success' => false,
-                'errors' => $validate->errors()
+                'errors' => $validate->errors()->first()
             ]);
         }
 
