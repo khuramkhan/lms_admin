@@ -8,4 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class CourseTopic extends Model
 {
     protected $fillable = ['topic','courseId','videoLink','pdf'];
+
+    public function questions()
+    {
+        return $this->hasMany(TopicQuestion::class,'topic_id');
+    }
 }

@@ -55,7 +55,7 @@
                                         <div class="form-group row">
                                             <label class="col-md-2 label-control" for="userinput1">Pdf</label>
                                             <div class="col-md-8">
-                                               <input type="file" name="pdf[]" class="form-control" required>
+                                               <input type="file" name="pdf[]" class="form-control">
                                             </div>
                                         </div>
                                     </div>
@@ -103,7 +103,7 @@
                                         <div class="form-group row">
                                             <label class="col-md-2 label-control" for="userinput1">Pdf</label>
                                             <div class="col-md-8">
-                                               <input type="file" name="pdf[]" class="form-control" required>
+                                               <input type="file" name="pdf[]" class="form-control" >
                                             </div>
                                         </div>
                                     </div>

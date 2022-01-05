@@ -51,8 +51,11 @@ class CourseController extends Controller
             }
 
             for($i=0; $i<count($request->topic); $i++){
+                $path = null;
+               if(isset($request->file()['pdf'][$i])){
                 $path = $request->file()['pdf'][$i]->store('/public/Topic_PDF');
                 $path = removePublicFromPath($path);
+               }
                 $topic = CourseTopic::create([
                     'topic' => $request->topic[$i],
                     'videoLink' => $request->videoLink[$i],

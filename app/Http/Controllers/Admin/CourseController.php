@@ -18,7 +18,8 @@ class CourseController extends Controller
         $success = false;
         $message = '';
 
-        $courses = Course::all();
+        $courses = Course::with('topics.questions')->get();
+
         if(count($courses) > 0){
             $success = true;
             $message = 'Courses Found Successfully!';
@@ -48,7 +49,7 @@ class CourseController extends Controller
         if($validate->fails()){
             return response()->json([
                 'success' => false,
-                'errors' => $validate->errors()
+                'errors' => $validate->errors()->first()
             ]);
         }
 
@@ -95,7 +96,7 @@ class CourseController extends Controller
         if($validate->fails()){
             return response()->json([
                 'success' => false,
-                'errors' => $validate->errors()
+                'errors' => $validate->errors()->first()
             ]);
         }
 
@@ -134,7 +135,7 @@ class CourseController extends Controller
         if($validate->fails()){
             return response()->json([
                 'success' => false,
-                'errors' => $validate->errors()
+                'errors' => $validate->errors()->first()
             ]);
         }
 
@@ -164,7 +165,7 @@ class CourseController extends Controller
         if($validate->fails()){
             return response()->json([
                 'success' => false,
-                'errors' => $validate->errors()
+                'errors' => $validate->errors()->first()
             ]);
         }
 
@@ -194,7 +195,7 @@ class CourseController extends Controller
         if($validate->fails()){
             return response()->json([
                 'success' => false,
-                'errors' => $validate->errors()
+                'errors' => $validate->errors()->first()
             ]);
         }
 

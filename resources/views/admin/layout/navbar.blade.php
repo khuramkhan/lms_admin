@@ -18,7 +18,7 @@
                             <div class="dropdown-menu dropdown-menu-right">
                                 <div class="arrow_box_right"><a class="dropdown-item" href=""><span class="avatar avatar-online"><img src="{{asset('/assets/admin/images/portrait/small/user.png')}}" alt="avatar"><span class="user-name text-bold-700 ml-1">UserName</span></span></a>
                                     <div class="dropdown-divider"></div>
-                                    <a class="dropdown-item" href="{{ url('/user/change-password') }}"><i class="fa fa-lock"></i> Change Password</a>
+                                    {{-- <a class="dropdown-item" href="{{ url('/user/change-password') }}"><i class="fa fa-lock"></i> Change Password</a> --}}
                                     <a class="dropdown-item" href="{{ url('logout') }}"><i class="ft-power"></i> Logout</a>
                                 </div>
                             </div>
