@@ -30,7 +30,8 @@ class User extends Authenticatable
         'status',
         'role',
         'token',
-        'device_id'
+        'device_id',
+        'profile_pic'
     ];
 
     /**
@@ -51,4 +52,12 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+   public function userWishListCourses(){
+       return $this->hasMany(UserWishlistCourse::class);
+   }
+
+   public function userPurchaseCourses(){
+       return $this->hasMany(PurchaseCourse::class);
+   }
 }

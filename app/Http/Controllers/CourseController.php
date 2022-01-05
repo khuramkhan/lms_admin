@@ -78,6 +78,7 @@ class CourseController extends Controller
                     'opt_2' => $request->opt_2[$index],
                     'opt_3' => $request->opt_3[$index],
                     'opt_4' => $request->opt_4[$index],
+                    'c_opt' => $request->c_opt[$index]
                 ]);
             }
             return back()->with('success','Question Created Successfully');

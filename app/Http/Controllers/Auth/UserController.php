@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\ContactUs;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -110,7 +111,8 @@ class UserController extends Controller
         ]);
     }
 
-    public function login(Request $request){
+    public function login(Request $request)
+    {
 
         $message = '';
         $success = false;
@@ -210,6 +212,98 @@ class UserController extends Controller
         return response()->json([
             'success' => $success,
             'message' => $message
+        ]);
+    }
+
+
+    public function contactUs(Request $request)
+    {
+        $validate = Validator::make($request->all(),[
+            'name' => 'required|string',
+            'email' => 'required|email',
+            'message' => 'required|string',
+            'mobile' => 'required|string'
+        ]);
+
+        if($validate->fails()){
+            return response()->json([
+                'success' => false,
+                'errors' => $validate->errors()
+            ]);
+        }
+        $data = $request->all();
+        $data['user_id'] = Auth::user()->id;
+        $contactUs = ContactUs::create($data);
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Message Send Successfully',
+            'contactUs' => $contactUs
+        ]);
+    }
+
+    public function changePassword(Request $request){
+        $validate = Validator::make($request->all(),[
+            'user_id' => 'integer|required|exists:users,id',
+            'new_password' => 'string|required',
+            'old_password' => 'string|required',
+        ]);
+
+        if($validate->fails()){
+            return response()->json([
+                'success' => false,
+                'errors' => $validate->errors()
+            ]);
+        }
+
+        $user = User::find($request->user_id);
+
+        if(! Hash::check($request->old_password,$user->password)){
+            return response()->json([
+                'success' => false,
+                'message' => 'Invalid Old Password'
+            ]);
+        }
+
+        $user->password = Hash::make($request->new_password);
+        $user->save();
+        return response()->json([
+            'success' => true,
+            'message' => 'Password Changed Successfully'
+        ]);
+    }
+
+    public function updateProfile(Request $request){
+
+        $validate = Validator::make($request->all(),[
+            'user_id' => 'integer|required|exists:users,id',
+            'profile_pic' => 'nullable|mimes:png,jpg,jpeg,svg',
+            'name' => 'required|string',
+            'phone' => 'required|string',
+        ]);
+
+        if($validate->fails()){
+            return response()->json([
+                'success' => false,
+                'errors' => $validate->errors()
+            ]);
+        }
+
+        $user = User::find($request->user_id);
+        if($request->hasFile('profile_pic')){
+            $path = $request->file('profile_pic')->store('public/ProfilePic');
+            $path = str_replace('public/','',$path);
+            $user->profile_pic = $path;
+        }
+
+        $user->name = $request->name;
+        $user->phone = $request->phone;
+        $user->save();
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Profile Updated Successfully',
+            'user' => $user
         ]);
     }
 }
