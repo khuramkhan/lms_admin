@@ -25,13 +25,21 @@
                     </li>
                 </ul>
                 <ul class="navigation navigation-main" id="main-menu-navigation" data-menu="menu-navigation">
-                    <li class=" nav-item"><a href="#"><i class="ft-user"></i></i><span class="menu-title" data-i18n="">Courses</span></a>
+                    <li class=" nav-item"><a href="#"><i class="ft-book"></i></i><span class="menu-title" data-i18n="">Courses</span></a>
                         <ul class="menu-content">
                             </li>
                                 <li class="{{Request::url() == url('courses') ? 'active' : ''}}"><a class="menu-item" href="{{ url('courses') }}">View Courses</a>
                             </li>
                             <li class="{{Request::url() == url('course/add') ? 'active' : ''}}"><a class="menu-item" href="{{ url('course/add') }}">Add Course</a>
                         </ul>
+                    </li>
+                </ul>
+                <ul class="navigation navigation-main" id="main-menu-navigation" data-menu="menu-navigation">
+                    <li class=" nav-item"><a href="{{ route('about-us') }}"><i class="ft-info"></i></i><span class="menu-title" data-i18n="">AboutUs</span></a>
+                    </li>
+                </ul>
+                <ul class="navigation navigation-main" id="main-menu-navigation" data-menu="menu-navigation">
+                    <li class=" nav-item"><a href="{{ route('contact-us') }}"><i class="ft-phone"></i></i><span class="menu-title" data-i18n="">ContactUs</span></a>
                     </li>
                 </ul>
         </div>
