@@ -89,4 +89,64 @@ class CourseController extends Controller
 
         return view('admin.courses.topics.quizes.add',compact('courseID','course'));
     }
+
+    public function editCourse(Request $request,$id){
+        $course = Course::find($id);
+        if(count($request->all()) > 0){
+            $validate = Validator::make($request->all(),[
+                'coverImage' => 'nullable|mimes:png,jpg,svg,jpeg'
+            ]);
+            if($validate->fails()){
+               return back()->with('error', $validate->errors()->messages()['coverImage'][0]);
+            }
+
+            $data = $request->all();
+            if($request->hasFile('coverImage')){
+                $path = $request->file('coverImage')->store('public/Images');
+                $path = str_replace('public/','',$path);
+                $data['coverImage'] = $path;
+            }
+             $course->update($data);
+        }
+        return view('admin.courses.edit',compact('course'));
+    }
+
+    public function viewCourse(Request $request,$id=null){
+        $course = Course::find($id);
+        return view('admin.courses.view',compact('course'));
+    }
+
+
+    public function editTopic(Request $request,$id){
+        $topic = CourseTopic::find($id);
+        if(count($request->all()) > 0){
+            $data = $request->all();
+            if($request->hasFile('pdf')){
+                $path = $request->file('pdf')->store('/public/Topic_PDF');
+                $path = removePublicFromPath($path);
+                $data['pdf'] = $path;
+            }
+            $topic->update($data);
+
+            $topic->questions->each(function($ques){
+                $ques->delete();
+            });
+
+            if(count($request->heading) > 0 ){
+                for($index=0; $index < count($request->heading); $index++){
+                    TopicQuestion::create([
+                        'topic_id' => $topic->id,
+                        'heading' => $request->heading[$index],
+                        'opt_1' => $request->opt_1[$index],
+                        'opt_2' => $request->opt_2[$index],
+                        'opt_3' => $request->opt_3[$index],
+                        'opt_4' => $request->opt_4[$index],
+                        'c_opt' => $request->c_opt[$index]
+                    ]);
+                }
+            }
+            return back()->with('success','Topic Updated Successfully!');
+        }
+        return view('admin.courses.topics.edit',compact('topic'));
+    }
 }

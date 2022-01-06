@@ -134,16 +134,6 @@ class UserController extends Controller
 
         if($user){
 
-            if(empty($user->device_id)){
-                $user->device_id = $request->device_id;
-                $user->save();
-            }elseif($user->device_id !== $request->device_id){
-                return response()->json([
-                    'success' => false,
-                    'message' => 'Please Login with your Registered Device'
-                ]);
-            }
-
             if($user->status == 'inactive'){
 
                 $success = false;
@@ -154,6 +144,17 @@ class UserController extends Controller
                 $verifyPassword = Hash::check($request->password,$user->password);
 
                 if($verifyPassword){
+
+                    if(empty($user->device_id)){
+                        $user->device_id = $request->device_id;
+                        $user->save();
+                    }elseif($user->device_id !== $request->device_id){
+                        return response()->json([
+                            'success' => false,
+                            'message' => 'Please Login with your Registered Device'
+                        ]);
+                    }
+
                     Auth::login($user);
                     $token = $user->createToken('MyApp')->accessToken;
                     return response()->json([

@@ -23,11 +23,11 @@
                         <div class="col-md-12 col-lg-4">
                             <div class="card pull-up border-top-info border-top-3 rounded-0">
                                 <div class="card-header">
-                                    <h4 class="card-title">Total User </h4>
+                                    <h4 class="card-title">Total App User </h4>
                                 </div>
                                 <div class="card-content collapse show">
                                     <div class="card-body p-1">
-                                        <h4 class="font-large-1 text-bold-400">0<i class="ft-users float-right"></i></h4>
+                                        <h4 class="font-large-1 text-bold-400">{{ $totalAppUsers }}<i class="ft-users float-right"></i></h4>
                                     </div>
                                     <div class="card-footer p-1">
 
