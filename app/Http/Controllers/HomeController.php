@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\ContactUs;
 use App\Models\SiteInfo;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -56,19 +57,8 @@ class HomeController extends Controller
         return view('admin.aboutUs.index',compact('aboutUs'));
     }
 
-    public function contactUs(Request $request){
-        $data = $request->all();
-        $contactUs = SiteInfo::where('key','contactUs')->first();
-        if(count($data) > 0){
-            if($contactUs){
-                $contactUs->update($data);
-            }else{
-                $data['key'] = 'ContactUs';
-                $contactUs = SiteInfo::create($data);
-            }
-            return back()->with('success','ContactUs Content Updated Successfully!');
-        }
-
+    public function contactUs(){
+        $contactUs = ContactUs::all();
         return view('admin.ContactUs.index',compact('contactUs'));
     }
 }

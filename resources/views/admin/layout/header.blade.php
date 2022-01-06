@@ -37,6 +37,8 @@
     <link rel="stylesheet" type="text/css" href="{{asset('/assets/admin/css/pages/dashboard-analytics.css')}}">
     <!-- END: Page CSS-->
 
+    <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
+    
     <!-- BEGIN: Custom CSS-->
     <link rel="stylesheet" type="text/css" href="{{asset('/assets/admin/css/style.css')}}">
     <!-- END: Custom CSS-->

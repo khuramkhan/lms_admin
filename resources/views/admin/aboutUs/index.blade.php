@@ -41,7 +41,7 @@
                                         <div class="form-group row">
                                             <label class="col-md-2 label-control" for="userinput1">Description</label>
                                             <div class="col-md-8">
-                                                <textarea name="description" rows="10" class="form-control border-primary" placeholder="Enter Description Here" required>{{ isset($aboutUs) ? $aboutUs->description : '' }}</textarea>
+                                                <textarea name="description" class="form-control border-primary summernote" placeholder="Enter Description Here" required>{{ isset($aboutUs) ? $aboutUs->description : '' }}</textarea>
                                             </div>
                                         </div>
                                     </div>

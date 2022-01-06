@@ -31,17 +31,17 @@
                                     <td>{{ $course->language}}</td>
                                     <td>{{ $course->validTill}}</td>
                                     <td>
-                                        {{-- <a class="btn btn-danger btn-sm" href="{{ 'delete/' . $item['id'] }}">
+                                        <a class="btn btn-primary btn-sm" href="{{ route('course.view',['id'=>$course->id]) }}">
                                             <i class="fas fa-trash">
                                             </i>
-                                            Delete
+                                            View
                                         </a>
 
-                                        <a class="btn btn-info btn-sm" href="{{ 'edit/' . $item['id'] }}">
+                                        <a class="btn btn-info btn-sm" href="{{route('course.edit',['id'=>$course->id])}}">
                                             <i class="fas fa-pencil-alt">
                                             </i>
                                             Edit
-                                        </a> --}}
+                                        </a>
                                     </td>
                                 </tr>
                             @endforeach

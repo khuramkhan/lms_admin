@@ -36,6 +36,7 @@
 <!-- END: Page JS-->
 
 <script src="{{asset('/assets/admin/js/custom.js')}}"> </script>
+<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js">
 <script>
     $('#myTable').DataTable({
 
@@ -57,6 +58,15 @@
     order: [ 1, 'asc' ]
 });
 </script>
+
+    <script>
+      $('.summernote').summernote({
+        placeholder: 'Hello Bootstrap 4',
+        tabsize: 2,
+        height: 200
+      });
+    </script>
+
 
 {{-- Get State And City start --}}
 <script>
@@ -114,7 +124,7 @@
                 console.log(err)
             }
             });
-        }else{    
+        }else{
             //$('select[name="productId"]').empty();
         }
     });
