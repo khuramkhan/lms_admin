@@ -27,7 +27,7 @@
                                             Topic:
                                         </div>
                                         <div class="col-md-6">
-                                            <span>Topic</span>
+                                            <span>{{ $topic->topic }}</span>
                                         </div>
                                     </div>
                                 </div>
