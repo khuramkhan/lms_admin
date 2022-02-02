@@ -59,6 +59,6 @@ class HomeController extends Controller
 
     public function contactUs(){
         $contactUs = ContactUs::all();
-        return view('admin.ContactUs.index',compact('contactUs'));
+        return view('admin.contactUs.index',compact('contactUs'));
     }
 }
