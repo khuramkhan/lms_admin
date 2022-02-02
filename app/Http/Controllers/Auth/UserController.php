@@ -293,6 +293,11 @@ class UserController extends Controller
         }
 
         $user = User::find($request->user_id);
+        return response()->json([
+            'success' => true,
+            'message' => 'Profile Updated Successfully',
+            'user' => $user
+        ]);
         if($request->hasFile('profile_pic')){
             $path = $request->file('profile_pic')->store('public/ProfilePic');
             $path = str_replace('public/','',$path);
