@@ -7,11 +7,16 @@ use Illuminate\Database\Eloquent\Model;
 
 class CourseTopic extends Model
 {
-    protected $fillable = ['topic','courseId','videoLink','pdf'];
+    protected $fillable = ['topic','courseId'];
 
     public function questions()
     {
         return $this->hasMany(TopicQuestion::class,'topic_id');
+    }
+
+    public function topicDetail()
+    {
+        return $this->hasMany(TopicDetail::class,'topic_id');
     }
 
     public function course()

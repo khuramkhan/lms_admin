@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Course;
+use App\Models\Order;
+use App\Models\OrderDetail;
 use App\Models\PurchaseCourse;
 use App\Models\Setting;
 use App\Models\User;
@@ -18,7 +20,7 @@ class CourseController extends Controller
         $success = false;
         $message = '';
 
-        $courses = Course::with('topics.questions')->get();
+        $courses = Course::with('topics.topicDetail')->with('topics.questions')->get();
 
         if(count($courses) > 0){
             $success = true;
@@ -38,11 +40,43 @@ class CourseController extends Controller
 
     public function purchaseCourse(Request $request){
 
+        $courses = json_decode($request->courses);
+
+        if(!is_array($courses)){
+            return [
+                'success' => false,
+                'errors' => 'Invalid Courses'
+            ];
+        }
+
+        $validateCourse = true;
+        $invalidCourseId = null;
+
+        foreach($courses as $course){
+            $c = Course::find($course->course_id);
+            if(!$c){
+                $validateCourse = false;
+                $invalidCourseId = $course->course_id;
+                break;
+            }
+        }
+
+        if($validateCourse == false){
+            $error = 'Invalid course_id('. $invalidCourseId . ')' ;
+            return [
+                'success' => false,
+                'errors' => $error
+            ];
+        }
+
+
+
+
         $validate = Validator::make($request->all(),[
-            'course_id' => 'integer|required|exists:courses,id',
             'user_id' => 'integer|required|exists:users,id',
             'payment_method' => 'required|string',
         ]);
+
 
         $data = $request->all();
 
@@ -63,28 +97,38 @@ class CourseController extends Controller
             ]);
         }
 
-        $isExistSubscription = PurchaseCourse::where('user_id',$request->user_id)->where('course_id',$request->course_id)->first();
-        if($isExistSubscription){
-            $isExistSubscription->current_date = $data['current_date'];
-            $isExistSubscription->valid_till = Carbon::parse($isExistSubscription->valid_till)->addDays($cSetting->value);
-            $isExistSubscription->save();
-            return response()->json([
-                'success' => true,
-                'message' => 'Subscription Updated Successfully',
-                'purchaseCourse' => $isExistSubscription
+
+        $amount = 0;
+        foreach ($courses as $course)
+        {
+            $amount += $course->price;
+        }
+
+        $order = Order::create([
+            'user_id' => $request->user_id,
+            'amount' => $amount,
+            'date' => Carbon::now(),
+            'valid_till' =>  Carbon::now()->addDays(intval($cSetting->value)),
+            'payment_method' => $request->payment_method
+        ]);
+
+        foreach($courses as $course){
+            OrderDetail::create([
+                'course_id' => $course->course_id,
+                'price' => $course->price,
+                'order_id' => $order->id
             ]);
         }
-        $data['valid_till'] = Carbon::now()->addDays(intval($cSetting->value));
 
-        $course = Course::find($request->course_id);
-        $data['price'] = $course->price;
 
-        $purchaseCourse = PurchaseCourse::create($data);
+
         return response()->json([
             'success' => true,
             'message' => 'Course Purchase Successfully!',
-            'purchaseCourse' => $purchaseCourse
+            'order' => $order->where('id',$order->id)->with('orderDetail')->get()
         ]);
+
+
     }
 
     public function userWishListCourses(Request $request){

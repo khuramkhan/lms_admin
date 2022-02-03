@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Course;
 use App\Models\CourseTopic;
+use App\Models\TopicDetail;
 use App\Models\TopicQuestion;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redis;
@@ -41,7 +42,9 @@ class CourseController extends Controller
     {
         $course = Course::find($request->courseID);
         if(count($request->all()) > 0){
-            if($request->hasFile('pdf')){
+
+
+            if(!empty($request->pdf)){
                 $validate = Validator::make($request->all(),[
                     'pdf.*' => 'mimes:pdf',
                 ]);
@@ -50,20 +53,83 @@ class CourseController extends Controller
                 }
             }
 
-            for($i=0; $i<count($request->topic); $i++){
-                $path = null;
-               if(isset($request->file()['pdf'][$i])){
-                $path = $request->file()['pdf'][$i]->store('/public/Topic_PDF');
-                $path = removePublicFromPath($path);
-               }
-                $topic = CourseTopic::create([
-                    'topic' => $request->topic[$i],
-                    'videoLink' => $request->videoLink[$i],
-                    'courseId' => $request->courseID,
-                    'pdf' => $path,
-                ]);
+            $topic = CourseTopic::create([
+                'topic' => $request->topic,
+                'courseId' => $request->courseID,
+            ]);
+
+            if(!empty($request->videoLink)){
+                $videoLinks = array_filter($request->videoLink, fn($value) => !is_null($value) && $value !== '');
+                foreach($videoLinks as $videoLink){
+                    TopicDetail::create([
+                        'topic_id' => $topic->id,
+                        'videoLink' => $videoLink
+                    ]);
+                }
             }
-           return redirect()->route('course.addQuiz',['courseID' => $request->courseID]);
+
+            if(!empty($request->addressUrl)){
+                $addressUrls = array_filter($request->addressUrl, fn($value) => !is_null($value) && $value !== '');
+                foreach($addressUrls as $addressUrl){
+                    TopicDetail::create([
+                        'topic_id' => $topic->id,
+                        'videoLink' => $addressUrl
+                    ]);
+                }
+            }
+
+            if(!empty($request->text)){
+                $texts = array_filter($request->text, fn($value) => !is_null($value) && $value !== '');
+                foreach($texts as $text){
+                    TopicDetail::create([
+                        'topic_id' => $topic->id,
+                        'videoLink' => $text
+                    ]);
+                }
+            }
+
+            if(!empty($request->pdf))
+            {
+                $pdfs = array_filter($request->pdf, fn($value) => !is_null($value) && $value !== '');
+                for($i=0; $i<count($pdfs); $i++){
+                    $path = null;
+                   if(isset($pdfs[$i])){
+                    $path = $pdfs[$i]->store('/public/Topic_PDF');
+                    $path = removePublicFromPath($path);
+                   }
+                     TopicDetail::create([
+                        'topic_id' => $topic->id,
+                        'pdf' => $path,
+                    ]);
+                }
+            }
+
+
+            // if($request->hasFile('pdf')){
+            //     $validate = Validator::make($request->all(),[
+            //         'pdf.*' => 'mimes:pdf',
+            //     ]);
+            //     if($validate->fails()){
+            //         return back()->with('error','You can upload only PDF');
+            //     }
+            // }
+
+            // for($i=0; $i<count($request->topic); $i++){
+            //     $path = null;
+            //    if(isset($request->file()['pdf'][$i])){
+            //     $path = $request->file()['pdf'][$i]->store('/public/Topic_PDF');
+            //     $path = removePublicFromPath($path);
+            //    }
+            //     $topic = CourseTopic::create([
+            //         'topic' => $request->topic[$i],
+            //         'videoLink' => $request->videoLink[$i],
+            //         'courseId' => $request->courseID,
+            //         'pdf' => $path,
+            //     ]);
+            // }
+            if($request->next == 'next'){
+                return back()->with('success','Topic has been added successfully');
+            }
         }
         return view('admin.courses.topics.add',['courseID' => $request->courseID ]);
     }
