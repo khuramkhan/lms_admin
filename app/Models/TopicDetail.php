@@ -7,5 +7,5 @@ use Illuminate\Database\Eloquent\Model;
 
 class TopicDetail extends Model
 {
-    protected $fillable = ['topic_id','pdf','text','videoLink','addressUrl'];
+    protected $fillable = ['topic_id','pdf','text','videoLink','addressUrl','name','type'];
 }

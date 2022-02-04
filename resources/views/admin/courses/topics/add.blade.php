@@ -34,7 +34,7 @@
                                             <label class="col-md-2 label-control" for="userinput1">Topic</label>
                                             <div class="col-md-8">
                                                 <input type="text" name="topic"
-                                                    class="form-control border-primary" placeholder="Topic" required>
+                                                    class="form-control border-primary"  required>
                                             </div>
                                         </div>
                                     </div>
@@ -47,9 +47,20 @@
                                     </div>
                                     <div class="col-md-12 singleType">
                                         <div class="form-group row">
+                                            <div class="col-md-12">
+                                                <div class="form-group row">
+                                                    <label class="col-md-2 label-control" for="userinput1">Name</label>
+                                                    <div class="col-md-8">
+                                                        <input type="text" name="name[]"
+                                                            class="form-control border-primary name" placeholder="Name" required>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
                                             <label class="col-md-2 label-control" for="userinput1">Type</label>
                                             <div class="col-md-8">
-                                                <select name="type" class="form-control typeDropdown" >
+                                                <select name="type[]" class="form-control typeDropdown" required>
                                                     <option value="">-----Select Type-----</option>
                                                     <option value="1">video</option>
                                                     <option value="2">pdf</option>
@@ -64,7 +75,7 @@
                                                     <label class="col-md-2 label-control" for="userinput1">Video Link</label>
                                                     <div class="col-md-8">
                                                         <input type="text" name="videoLink[]"
-                                                            class="form-control border-primary field" placeholder="Topic" >
+                                                            class="form-control border-primary field"  >
                                                     </div>
                                                 </div>
                                             </div>
@@ -72,7 +83,7 @@
                                                 <div class="form-group row">
                                                     <label class="col-md-2 label-control" for="userinput1">text</label>
                                                     <div class="col-md-8">
-                                                       <textarea name="text[]" class="form-control field" placeholder="Enter Comma Seprated Links"  rows="5"></textarea>
+                                                       <textarea name="text[]" class="form-control field"  rows="5"></textarea>
                                                     </div>
                                                 </div>
                                             </div>
@@ -81,7 +92,7 @@
                                                     <label class="col-md-2 label-control" for="userinput1">Address Url</label>
                                                     <div class="col-md-8">
                                                         <input type="text" name="addressUrl[]"
-                                                            class="form-control border-primary field" placeholder="Topic" >
+                                                            class="form-control border-primary field"  >
                                                     </div>
                                                 </div>
                                             </div>
@@ -100,11 +111,11 @@
                             <div class="form-actions right">
                                 <button class="btn btn-primary nextBtn">
                                     <input type="hidden" name="next" id="nextStatus">
-                                    <i class="la la-check-square-o"></i> Save & And More
+                                    <i class="la la-check-square-o"></i> Save & Next
                                 </button>
-                                <a href="{{ route('course.addQuiz',['courseID' => $courseID]) }}" class="btn btn-primary">
+                                {{-- <a href="{{ route('course.addQuiz',['courseID' => $courseID]) }}" class="btn btn-primary">
                                     <i class="la la-check-square-o"></i> Next
-                                </a>
+                                </a> --}}
                             </div>
                         </form>
                     </div>
@@ -114,18 +125,29 @@
     </div>
     <script>
         window.addEventListener('load',function(){
-            $('#addMore').on('click',function(event){
 
+            $('#addMore').on('click',function(event){
                 event.preventDefault();
                 let topicWrapper = $('#topicWrapper');
                 let type = `<div class="col-md-12 singleType">
                                     <div class="col-12 d-flex justify-content-end my-2">
                                         <button type="button" class="btn btn-danger btn-sm deleteTopic" ><i class="fas fa-trash"></i> Delete</button>
                                     </div>
+                                    <div class="form-group row">
+                                            <div class="col-md-12">
+                                                <div class="form-group row">
+                                                    <label class="col-md-2 label-control" for="userinput1">Name</label>
+                                                    <div class="col-md-8">
+                                                        <input type="text" name="name[]"
+                                                            class="form-control border-primary name" placeholder="Name" required>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
                                         <div class="form-group row">
                                             <label class="col-md-2 label-control" for="userinput1">Type</label>
                                             <div class="col-md-8">
-                                                <select name="type" class="form-control typeDropdown" >
+                                                <select name="type" class="form-control typeDropdown" required>
                                                     <option value="">-----Select Type-----</option>
                                                     <option value="1">video</option>
                                                     <option value="2">pdf</option>
@@ -148,7 +170,7 @@
                                                     <label class="col-md-2 label-control" for="userinput1">Video Link</label>
                                                     <div class="col-md-8">
                                                         <input type="text" name="videoLink[]"
-                                                            class="form-control border-primary field" placeholder="Topic" >
+                                                            class="form-control border-primary field"  >
                                                     </div>
                                                 </div>
                                             </div>
@@ -157,7 +179,7 @@
                                                     <label class="col-md-2 label-control" for="userinput1">Address Url</label>
                                                     <div class="col-md-8">
                                                         <input type="text" name="addressUrl[]"
-                                                            class="form-control border-primary field" placeholder="Topic" >
+                                                            class="form-control border-primary field"  >
                                                     </div>
                                                 </div>
                                             </div>
@@ -182,8 +204,17 @@
                 }
             });
 
-            function hideOtherTab(current = '',parent = '') {
+            function manageOptions(current = '',parent = '') {
+                console.log(current);
+                console.log(parent);
                 let allOptions = parent.find('.optionTab');
+                let currentClassName = '.'+current;
+                let nameForCurrent = current+'Name[]';
+
+                parent.find(currentClassName).show();
+                parent.find('.name').attr('name',nameForCurrent);
+                parent.find('.field').attr('required',true);
+
                 allOptions.each(function(){
                     if(!$(this).hasClass(current)){
                         $(this).find('.field').attr('required',false);
@@ -196,23 +227,21 @@
             $( "#topicWrapper" ).delegate( ".typeDropdown", "change", function(event) {
                 let parent = $(this).parent().parent().parent();
                 let selectedValue = $(this).find('option:selected').val();
-                if(selectedValue == 1){
-                    parent.find('.videoLink').show();
-                    $(parent).find('.field').attr('required',true);
-                    hideOtherTab('videoLink',parent);
-                }else if(selectedValue == 2){
-                    parent.find('.pdf').show()
-                    $(parent).find('.field').attr('required',true);
-                    hideOtherTab('pdf',parent);
-                }else if(selectedValue == 3){
-                    $(parent).find('.field').attr('required',true);
-                    parent.find('.addressUrl').show()
-                    hideOtherTab('addressUrl',parent);
+                if(selectedValue == 1)
+                {
+                    manageOptions('videoLink',parent);
                 }
-                else if(selectedValue == 4){
-                    $(parent).find('.field').attr('required',true);
-                    parent.find('.text').show()
-                    hideOtherTab('text',parent);
+                else if(selectedValue == 2)
+                {
+                    manageOptions('pdf',parent);
+                }
+                else if(selectedValue == 3)
+                {
+                    manageOptions('addressUrl',parent);
+                }
+                else if(selectedValue == 4)
+                {
+                    manageOptions('text',parent);
                 }
             });
 

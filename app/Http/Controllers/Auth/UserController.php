@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Models\ContactUs;
+use App\Models\GeneralInfo;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -311,5 +312,62 @@ class UserController extends Controller
             'message' => 'Profile Updated Successfully',
             'user' => $user
         ]);
+    }
+
+
+    public function aboutUs(Request $request)
+    {
+        $validate = Validator::make($request->all(),[
+            'heading' => 'required|string',
+            'description' => 'required|string',
+        ]);
+
+        if($validate->fails()){
+            return response()->json([
+                'success' => false,
+                'errors' => $validate->errors()->first()
+            ]);
+        }
+
+        $info = GeneralInfo::updateOrCreate([
+            'key' => 'aboutUs',
+            'heading' => $request->heading,
+            'description' => $request->description
+        ]);
+
+        return[
+            'success' => true,
+            'message' => 'AboutUs Content Updated Successfully',
+            'data' => $info
+        ];
+
+    }
+
+    public function faqs(Request $request)
+    {
+        $validate = Validator::make($request->all(),[
+            'heading' => 'required|string',
+            'description' => 'required|string',
+        ]);
+
+        if($validate->fails()){
+            return response()->json([
+                'success' => false,
+                'errors' => $validate->errors()->first()
+            ]);
+        }
+
+        $info = GeneralInfo::updateOrCreate([
+            'key' => 'faqs',
+            'heading' => $request->heading,
+            'description' => $request->description
+        ]);
+
+        return[
+            'success' => true,
+            'message' => 'FAQs Content Updated Successfully',
+            'data' => $info
+        ];
+
     }
 }
