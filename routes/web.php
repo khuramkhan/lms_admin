@@ -52,6 +52,8 @@ Route::middleware('isLogin')->group(function(){
 
     Route::get('aboutUs',[HomeController::class,'aboutUs'])->name('about-us');
     Route::post('aboutUs',[HomeController::class,'aboutUs'])->name('about-us');
+    Route::get('faqs',[HomeController::class,'faqs'])->name('faqs');
+    Route::post('faqs',[HomeController::class,'faqs'])->name('faqs');
     Route::get('contactUs',[HomeController::class,'contactUs'])->name('contact-us');
     Route::post('contactUs',[HomeController::class,'contactUs'])->name('contact-us');
     Route::get('/logout',[HomeController::class,'logout']);

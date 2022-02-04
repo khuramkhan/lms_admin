@@ -57,6 +57,22 @@ class HomeController extends Controller
         return view('admin.aboutUs.index',compact('aboutUs'));
     }
 
+    public function faqs(Request $request){
+        $data = $request->all();
+        $faqs = SiteInfo::where('key','faqs')->first();
+        if(count($data) > 0){
+            if($faqs){
+                $faqs->update($data);
+            }else{
+                $data['key'] = 'faqs';
+                $faqs = SiteInfo::create($data);
+            }
+            return back()->with('success','AboutUs Content Updated Successfully!');
+        }
+
+        return view('admin.faqs.index',compact('faqs'));
+    }
+
     public function contactUs(){
         $contactUs = ContactUs::all();
         return view('admin.contactUs.index',compact('contactUs'));
