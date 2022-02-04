@@ -39,7 +39,11 @@
                     </li>
                 </ul>
                 <ul class="navigation navigation-main" id="main-menu-navigation" data-menu="menu-navigation">
-                    <li class=" nav-item"><a href="{{ route('contact-us') }}"><i class="ft-phone"></i></i><span class="menu-title" data-i18n="">FAQs</span></a>
+                    <li class=" nav-item"><a href="{{ route('faqs') }}"><i class="ft-info"></i></i><span class="menu-title" data-i18n="">FAQs</span></a>
+                    </li>
+                </ul>
+                <ul class="navigation navigation-main" id="main-menu-navigation" data-menu="menu-navigation">
+                    <li class=" nav-item"><a href="{{ route('contact-us') }}"><i class="ft-phone"></i></i><span class="menu-title" data-i18n="">ContactUs</span></a>
                     </li>
                 </ul>
         </div>

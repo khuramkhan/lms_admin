@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Models\ContactUs;
 use App\Models\GeneralInfo;
+use App\Models\SiteInfo;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -314,27 +315,19 @@ class UserController extends Controller
 
     public function aboutUs(Request $request)
     {
-        $validate = Validator::make($request->all(),[
-            'heading' => 'required|string',
-            'description' => 'required|string',
-        ]);
+       $info = SiteInfo::where('key','aboutUs')->first();
 
-        if($validate->fails()){
-            return response()->json([
+       if(!$info){
+            return[
                 'success' => false,
-                'errors' => $validate->errors()->first()
-            ]);
-        }
-
-        $info = GeneralInfo::updateOrCreate([
-            'key' => 'aboutUs',
-            'heading' => $request->heading,
-            'description' => $request->description
-        ]);
+                'message' => 'AboutUs Content Not Found',
+                'data' => $info
+            ];
+       }
 
         return[
             'success' => true,
-            'message' => 'AboutUs Content Updated Successfully',
+            'message' => 'AboutUs Content Found Successfully',
             'data' => $info
         ];
 
@@ -342,23 +335,16 @@ class UserController extends Controller
 
     public function faqs(Request $request)
     {
-        $validate = Validator::make($request->all(),[
-            'heading' => 'required|string',
-            'description' => 'required|string',
-        ]);
 
-        if($validate->fails()){
-            return response()->json([
+       $info = SiteInfo::where('key','faqs')->first();
+
+       if(!$info){
+            return[
                 'success' => false,
-                'errors' => $validate->errors()->first()
-            ]);
-        }
-
-        $info = GeneralInfo::updateOrCreate([
-            'key' => 'faqs',
-            'heading' => $request->heading,
-            'description' => $request->description
-        ]);
+                'message' => 'FAQs Content Not Found',
+                'data' => $info
+            ];
+       }
 
         return[
             'success' => true,
