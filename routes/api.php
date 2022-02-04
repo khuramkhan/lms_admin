@@ -21,6 +21,8 @@ Route::post('/register',[UserController::class,'register']);
 Route::post('/confirm-otp',[UserController::class,'confirmOtp']);
 Route::post('/login',[UserController::class,'login']);
 Route::post('/forgot-password',[UserController::class,'forgotPassword']);
+Route::post('/aboutUs',[UserController::class,"aboutUs"]);
+Route::post('/faqs',[UserController::class,"faqs"]);
 
 Route::middleware('auth:api')->group( function () {
     Route::get('courses',[CourseController::class,'courses']);
