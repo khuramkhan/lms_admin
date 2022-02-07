@@ -67,8 +67,8 @@ class CourseController extends Controller
                         'topic_id' => $topic->id,
                         'videoLink' => $videoLink
                     ]);
+                    $count++;
                 }
-                $count++;
             }
 
             if(!empty($request->addressUrl)){
