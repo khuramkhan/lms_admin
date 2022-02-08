@@ -58,6 +58,6 @@ class User extends Authenticatable
    }
 
    public function userPurchaseCourses(){
-       return $this->hasMany(PurchaseCourse::class);
+       return $this->hasMany(Order::class)->with('orderDetail.course');
    }
 }
