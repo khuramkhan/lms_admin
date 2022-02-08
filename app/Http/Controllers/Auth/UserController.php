@@ -303,6 +303,9 @@ class UserController extends Controller
 
         $user->name = $request->name;
         $user->phone = $request->phone;
+        $user->dob = $request->dob;
+        $user->city = $request->city;
+        $user->country = $request->country;
         $user->save();
 
         return response()->json([
