@@ -260,4 +260,18 @@ class CourseController extends Controller
             'courses' => $courses
         ]);
     }
+
+    public function stripePost(Request $request)
+    {
+        \Stripe\Stripe::setApiKey( 'sk_test_51Guxg5BaNTEFLLCrS6FdXiV3XB8JQdMb4sNkZZAszrKpCAkbjwaySkTmQpBJn7a2dZ0NYgdCbRrLent1F7n8A8Db00u3Pj2pxM');
+        $intent = \Stripe\PaymentIntent::create([
+            'amount' => 10,
+            'currency' => 'usd',
+        ]);
+        $client_secret = $intent->client_secret;
+        return response()->json([
+            'success' => true,
+            'secret_token'=>$client_secret
+        ]);
+    }
 }
