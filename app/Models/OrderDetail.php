@@ -8,4 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class OrderDetail extends Model
 {
     protected $fillable = ['course_id','price','order_id'];
+
+    public function course()
+    {
+        return $this->belongsTo(Course::class);
+    }
 }

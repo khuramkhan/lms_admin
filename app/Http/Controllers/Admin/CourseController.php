@@ -244,7 +244,8 @@ class CourseController extends Controller
         }
 
         $user = User::find($request->user_id);
-        $courses = $user->userPurchaseCourses;
+        $courses = $user->userPurchaseCourses()->where('valid_till','>',Carbon::now())->get();
+
 
         if(count($courses) < 0){
             return response()->json([
