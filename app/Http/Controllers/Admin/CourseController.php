@@ -264,8 +264,9 @@ class CourseController extends Controller
     public function stripePost(Request $request)
     {
         \Stripe\Stripe::setApiKey( 'sk_test_51Guxg5BaNTEFLLCrS6FdXiV3XB8JQdMb4sNkZZAszrKpCAkbjwaySkTmQpBJn7a2dZ0NYgdCbRrLent1F7n8A8Db00u3Pj2pxM');
+        $amount = $request->amount;
         $intent = \Stripe\PaymentIntent::create([
-            'amount' => 10,
+            'amount' => $amount * 100,
             'currency' => 'usd',
         ]);
         $client_secret = $intent->client_secret;

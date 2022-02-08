@@ -23,7 +23,7 @@ Route::post('/login',[UserController::class,'login']);
 Route::post('/forgot-password',[UserController::class,'forgotPassword']);
 Route::get('/aboutUs',[UserController::class,"aboutUs"]);
 Route::get('/faqs',[UserController::class,"faqs"]);
-Route::post("/stripePost", CourseController::class, "stripePost");
+Route::post("/stripePost",[CourseController::class, "stripePost"]);
 Route::middleware('auth:api')->group( function () {
     Route::get('courses',[CourseController::class,'courses']);
     Route::prefix('course')->group(function(){
