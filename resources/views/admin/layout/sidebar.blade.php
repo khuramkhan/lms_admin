@@ -50,7 +50,7 @@
                     <li class=" nav-item"><a href="#"><i class="ft-settings"></i></i><span class="menu-title" data-i18n="">Setting</span></a>
                         <ul class="menu-content">
                             </li>
-                                <li class="{{Request::url() == url('courses') ? 'active' : ''}}"><a class="menu-item" href="{{ url('courses') }}">Stripe</a>
+                                <li class="{{Request::url() == route('settings.stripe') ? 'active' : ''}}"><a class="menu-item" href="{{ route('settings.stripe') }}">Stripe</a>
                             </li>
                         </ul>
                     </li>

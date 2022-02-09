@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -57,7 +58,14 @@ class User extends Authenticatable
        return $this->hasMany(UserWishlistCourse::class);
    }
 
-   public function userPurchaseCourses(){
+   public function userPurchaseHistory()
+   {
        return $this->hasMany(Order::class)->with('orderDetail.course');
+   }
+
+
+   public function userPurchaseCourses()
+   {
+       return $this->hasMany(Order::class)->where('valid_till' , '>' ,Carbon::now());
    }
 }

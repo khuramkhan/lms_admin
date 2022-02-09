@@ -59,7 +59,7 @@ Route::middleware('isLogin')->group(function(){
     Route::post('contactUs',[HomeController::class,'contactUs'])->name('contact-us');
     Route::get('/logout',[HomeController::class,'logout']);
 
-    // Route::prefix('settings')->group(function(){
-    //     Route::get('stripe',[SettingController::class,'stripe']);
-    // });
+    Route::prefix('settings')->as('settings.')->group(function(){
+        Route::get('stripe',[SettingController::class,'stripe'])->name('stripe');
+    });
 });

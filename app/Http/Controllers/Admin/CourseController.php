@@ -20,7 +20,8 @@ class CourseController extends Controller
         $success = false;
         $message = '';
 
-        $courses = Course::with('topics.topicDetail')->with('topics.questions')->get();
+        $courses = Course::with('topics.topicDetail')->get();
+        // $courses = Course::with('topics.topicDetail')->with('topics.questions')->get();
 
         if(count($courses) > 0){
             $success = true;
@@ -214,19 +215,19 @@ class CourseController extends Controller
         }
 
         $user = User::find($request->user_id);
-        $courses = $user->userPurchaseCourses;
+        $orders = $user->userPurchaseHistory;
 
-        if(count($courses) < 0){
+        if(count($orders) < 0){
             return response()->json([
                 'success' => false,
-                'message' => "User's Purchased Courses Not Found"
+                'message' => "User's Orders Not Found"
             ]);
         }
 
         return response()->json([
             'success' => true,
-            'message' => "User's Purchased Courses Found Successfully",
-            'courses' => $courses
+            'message' => "User's Orders Found Successfully",
+            'orders' => $orders
         ]);
     }
 
@@ -244,10 +245,23 @@ class CourseController extends Controller
         }
 
         $user = User::find($request->user_id);
-        $courses = $user->userPurchaseCourses()->where('valid_till','>',Carbon::now())->get();
+
+        $courses = [];
+
+        $orders = $user->userPurchaseCourses;
+
+        if(count($orders) > 0){
+            foreach($orders as $order){
+                $orderDetails = $order->orderDetail;
+                foreach($orderDetails as $od){
+                    $course = Course::find($od->course_id)->with('topics.topicDetail')->get();
+                    $courses [] = $course;
+                }
+            }
+        }
 
 
-        if(count($courses) < 0){
+        if(count($courses) <= 0){
             return response()->json([
                 'success' => false,
                 'message' => "User's Subscriptions Not Found"
