@@ -46,10 +46,15 @@
                     <li class=" nav-item"><a href="{{ route('contact-us') }}"><i class="ft-phone"></i></i><span class="menu-title" data-i18n="">ContactUs</span></a>
                     </li>
                 </ul>
-                {{-- <ul class="navigation navigation-main" id="main-menu-navigation" data-menu="menu-navigation">
-                    <li class=" nav-item"><a href="{{ route('contact-us') }}"><i class="ft-phone"></i></i><span class="menu-title" data-i18n="">ContactUs</span></a>
+                <ul class="navigation navigation-main" id="main-menu-navigation" data-menu="menu-navigation">
+                    <li class=" nav-item"><a href="#"><i class="ft-settings"></i></i><span class="menu-title" data-i18n="">Setting</span></a>
+                        <ul class="menu-content">
+                            </li>
+                                <li class="{{Request::url() == route('settings.stripe') ? 'active' : ''}}"><a class="menu-item" href="{{ route('settings.stripe') }}">Stripe</a>
+                            </li>
+                        </ul>
                     </li>
-                </ul> --}}
+                </ul>
         </div>
     </div>
     <!-- END: Main Menu-->
