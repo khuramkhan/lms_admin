@@ -254,7 +254,7 @@ class CourseController extends Controller
             foreach($orders as $order){
                 $orderDetails = $order->orderDetail;
                 foreach($orderDetails as $od){
-                    $course = Course::find($od->course_id)->with('topics.topicDetail')->get();
+                    $course = Course::find($od->course_id)->with('topics.topicDetail')->first();
                     $courses [] = $course;
                 }
             }
