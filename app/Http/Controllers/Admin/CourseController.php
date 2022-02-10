@@ -246,20 +246,23 @@ class CourseController extends Controller
 
         $user = User::find($request->user_id);
 
-        $courses = [];
+        $courses = null;
 
         $orders = $user->userPurchaseCourses;
+
 
         if(count($orders) > 0){
             foreach($orders as $order){
                 $orderDetails = $order->orderDetail;
                 foreach($orderDetails as $od){
-                    $course = Course::find($od->course_id)->with('topics.topicDetail')->first();
+                    $course = Course::find($od->course_id);
+                    $course->topics->each(function($topic){
+                        $topic->topicDetail;
+                    });
                     $courses [] = $course;
                 }
             }
         }
-
 
         if(count($courses) <= 0){
             return response()->json([
