@@ -41,9 +41,11 @@
                                             <select name="action"  class="form-control userAction">
                                                 <option value="">--Select--</option>
                                                 <option value="removeId">RemoveId</option>
+                                                <option value="purhis" id="{{ $user->id }}">Purchase History</option>
                                             </select>
                                             <input type="hidden" name="userId" value="{{ $user->id }}">
                                         </form>
+                                        <form action=""></form>
                                     </td>
                                 </tr>
                             @endforeach
@@ -56,8 +58,11 @@
 <script>
     window.addEventListener('load',function(){
         $('.userAction').on('change',function(){
-            if($(this).val()){
+            if($(this).val() == 'removeId'){
                 $(this).parent().submit();
+            }else if($(this).val() == 'purhis'){
+                let userId = $(this).find('option:selected').attr('id');
+                window.location.href = `/user/${userId}/purchaseHistory`;
             }
         })
     })

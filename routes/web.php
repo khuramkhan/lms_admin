@@ -24,9 +24,10 @@ Route::middleware('isLogin')->group(function(){
     Route::get('users',[UserController::class,'index']);
     Route::prefix('user')->group(function(){
         Route::post('/action',[UserController::class,'userAction'])->name('user.action');
+        Route::get('{id}/purchaseHistory',[UserController::class,'purchaseHistory'])->name('user.purchaseHistory');
     });
 
-
+    Route::post('responseToEmail',[UserController::class,'responseToEmail'])->name('user.response.email');
 
     Route::get('courses',[CourseController::class,"index"]);
     Route::prefix('course')->as('course.')->group(function(){
@@ -57,9 +58,11 @@ Route::middleware('isLogin')->group(function(){
     Route::post('faqs',[HomeController::class,'faqs'])->name('faqs');
     Route::get('contactUs',[HomeController::class,'contactUs'])->name('contact-us');
     Route::post('contactUs',[HomeController::class,'contactUs'])->name('contact-us');
+    Route::delete('deleteContanctUs',[HomeController::class,'deleteContactUs'])->name('delete.contactus');
     Route::get('/logout',[HomeController::class,'logout']);
 
     Route::prefix('settings')->as('settings.')->group(function(){
         Route::get('stripe',[SettingController::class,'stripe'])->name('stripe');
     });
+
 });

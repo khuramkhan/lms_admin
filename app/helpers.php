@@ -22,7 +22,7 @@ function sendMail($to, $subject, $template)
         $mail->Port       = 465;                                    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
 
         //Recipients
-        $mail->setFrom(env('MAIL_USERNAME'), 'LARAVEL');
+        $mail->setFrom(env('MAIL_USERNAME'), env('MAIL_FROM_NAME'));
 
         //Content
         $mail->isHTML(true);                                  //Set email format to HTML
