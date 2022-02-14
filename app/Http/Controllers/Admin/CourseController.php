@@ -35,7 +35,7 @@ class CourseController extends Controller
                 }
             }
         }
-        
+
         $courses = Course::with('topics.topicDetail')->get()->each(function($course) use($userPurchaseCourses){
             $course->is_purchased = false;
             if(count($userPurchaseCourses) > 0)
@@ -242,7 +242,8 @@ class CourseController extends Controller
         $user = User::find($request->user_id);
         $orders = $user->userPurchaseHistory;
 
-        if(count($orders) < 0){
+
+        if(count($orders) <= 0){
             return response()->json([
                 'success' => false,
                 'message' => "User's Orders Not Found"
@@ -271,9 +272,10 @@ class CourseController extends Controller
 
         $user = User::find($request->user_id);
 
-        $courses = null;
+        $courses = [];
 
         $orders = $user->userPurchaseCourses;
+
         if(count($orders) > 0){
             foreach($orders as $order){
                 $orderDetails = $order->orderDetail;
@@ -286,6 +288,8 @@ class CourseController extends Controller
                 }
             }
         }
+
+
 
         if(count($courses) <= 0){
             return response()->json([
