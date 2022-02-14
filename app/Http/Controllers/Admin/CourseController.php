@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Course;
+use App\Models\CourseTopic;
 use App\Models\Order;
 use App\Models\OrderDetail;
 use App\Models\PurchaseCourse;
@@ -20,8 +21,32 @@ class CourseController extends Controller
         $success = false;
         $message = '';
 
-        $courses = Course::with('topics.topicDetail')->get();
-        // $courses = Course::with('topics.topicDetail')->with('topics.questions')->get();
+        $userPurchaseCourses = [];
+        $orders = auth()->user()->userPurchaseCourses;
+        if(count($orders) > 0){
+            foreach($orders as $order){
+                $orderDetails = $order->orderDetail;
+                foreach($orderDetails as $od){
+                    $course = Course::find($od->course_id);
+                    $course->topics->each(function($topic){
+                        $topic->topicDetail;
+                    });
+                    $userPurchaseCourses [] = $course;
+                }
+            }
+        }
+        
+        $courses = Course::with('topics.topicDetail')->get()->each(function($course) use($userPurchaseCourses){
+            $course->is_purchased = false;
+            if(count($userPurchaseCourses) > 0)
+            {
+                foreach($userPurchaseCourses as $pCourse){
+                    if($pCourse->id == $course->id){
+                        $course->is_purchased = true;
+                    }
+                }
+            }
+        });
 
         if(count($courses) > 0){
             $success = true;
@@ -249,8 +274,6 @@ class CourseController extends Controller
         $courses = null;
 
         $orders = $user->userPurchaseCourses;
-
-
         if(count($orders) > 0){
             foreach($orders as $order){
                 $orderDetails = $order->orderDetail;

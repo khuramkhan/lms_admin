@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
+use Mockery\Matcher\Contains;
 
 class HomeController extends Controller
 {
@@ -76,5 +77,15 @@ class HomeController extends Controller
     public function contactUs(){
         $contactUs = ContactUs::all();
         return view('admin.contactUs.index',compact('contactUs'));
+    }
+
+    public function deleteContactUs(Request $request)
+    {
+        $contactUs = ContactUs::find($request->id);
+        if($contactUs){
+            $contactUs->delete();
+            return ['success' => true];
+        }
+        return ['success' => false];
     }
 }
