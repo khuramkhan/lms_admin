@@ -6,7 +6,7 @@
         <div class="col">
             <div class="card">
                 <div class="card-header">
-                    <h4 class="card-title" id="horz-layout-colored-controls">Purchased Courses</h4>
+                    <h4 class="card-title" id="horz-layout-colored-controls">Active Courses</h4>
                 </div>
                 @if (session()->has('success') || session()->has('error'))
                             <div class="alert alert-{{session()->has('success') ? 'success' : 'danger'}}">
@@ -21,6 +21,7 @@
                                 <th>Course Name</th>
                                 <th>Price</th>
                                 <th>Purchase Date</th>
+                                {{-- <th>Valid Till</th> --}}
                             </tr>
                         </thead>
                         <tbody>
@@ -33,6 +34,7 @@
                                     <td>{{ $course->name }}</td>
                                     <td>{{ $course->price }}</td>
                                     <td>{{ $course->purchaseDate }}</td>
+                                    {{-- <td>{{ $course->valid_till }}</td> --}}
                                 </tr>
                             @endforeach
                         </tbody>

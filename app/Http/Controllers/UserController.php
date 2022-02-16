@@ -42,8 +42,7 @@ class UserController extends Controller
         $courses = [];
 
         if($user){
-            $orders = $user->userPurchaseCourses;
-
+            $orders = $user->userPurchaseHistory;
             if(count($orders) > 0){
                 foreach($orders as $order){
                     $orderDetails = $order->orderDetail;
@@ -57,5 +56,28 @@ class UserController extends Controller
         }
 
         return view('admin.users.purchase-history',compact('courses'));
+    }
+
+
+    public function activeCourses($userId = null)
+    {
+        $user = User::find($userId);
+        $courses = [];
+
+        if($user){
+            $orders = $user->userPurchaseCourses;
+            if(count($orders) > 0){
+                foreach($orders as $order){
+                    $orderDetails = $order->orderDetail;
+                    foreach($orderDetails as $od){
+                        $course = Course::find($od->course_id);
+                        $course->purchaseDate = Carbon::parse($od->create_at)->isoFormat('MMM D YYYY');
+                        // $course->valid_till = Carbon::parse($od->valit_till)->isoFormat('MMM D YYYY');
+                        $courses [] = $course;
+                    }
+                }
+            }
+        }
+        return view('admin.users.activeCourses',compact('courses'));
     }
 }
