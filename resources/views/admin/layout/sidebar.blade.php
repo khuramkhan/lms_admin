@@ -47,6 +47,15 @@
                     </li>
                 </ul>
                 <ul class="navigation navigation-main" id="main-menu-navigation" data-menu="menu-navigation">
+                    <li class=" nav-item"><a href="#"><i class="ft-layers"></i></i><span class="menu-title" data-i18n="">Reports</span></a>
+                        <ul class="menu-content">
+                            </li>
+                                <li class="{{Request::url() == route('reportstotal.earing') ? 'active' : ''}}"><a class="menu-item" href="{{ route('reportstotal.earing') }}">Total Earning</a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+                <ul class="navigation navigation-main" id="main-menu-navigation" data-menu="menu-navigation">
                     <li class=" nav-item"><a href="#"><i class="ft-settings"></i></i><span class="menu-title" data-i18n="">Setting</span></a>
                         <ul class="menu-content">
                             </li>

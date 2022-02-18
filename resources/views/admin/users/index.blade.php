@@ -42,6 +42,7 @@
                                                 <option value="">--Select--</option>
                                                 <option value="removeId">RemoveId</option>
                                                 <option value="purhis" id="{{ $user->id }}">Purchase History</option>
+                                                <option value="actCrs" id="{{ $user->id }}">Active Courses</option>
                                             </select>
                                             <input type="hidden" name="userId" value="{{ $user->id }}">
                                         </form>
@@ -63,6 +64,9 @@
             }else if($(this).val() == 'purhis'){
                 let userId = $(this).find('option:selected').attr('id');
                 window.location.href = `/user/${userId}/purchaseHistory`;
+            }else if($(this).val() == 'actCrs'){
+                let userId = $(this).find('option:selected').attr('id');
+                window.location.href = `/user/${userId}/activeCourses`;
             }
         })
     })

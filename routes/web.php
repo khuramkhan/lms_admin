@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\CourseController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\ReportsController;
 use App\Http\Controllers\SettingController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
@@ -25,6 +26,7 @@ Route::middleware('isLogin')->group(function(){
     Route::prefix('user')->group(function(){
         Route::post('/action',[UserController::class,'userAction'])->name('user.action');
         Route::get('{id}/purchaseHistory',[UserController::class,'purchaseHistory'])->name('user.purchaseHistory');
+        Route::get('{id}/activeCourses',[UserController::class,'activeCourses'])->name('user.activeCourses');
     });
 
     Route::post('responseToEmail',[UserController::class,'responseToEmail'])->name('user.response.email');
@@ -61,8 +63,14 @@ Route::middleware('isLogin')->group(function(){
     Route::delete('deleteContanctUs',[HomeController::class,'deleteContactUs'])->name('delete.contactus');
     Route::get('/logout',[HomeController::class,'logout']);
 
+    Route::prefix('reports')->as('reports')->group(function(){
+        Route::get('total-earning',[ReportsController::class,'totalEarning'])->name('total.earing');
+        Route::post('total-earning',[ReportsController::class,'totalEarning'])->name('total.earing');
+    });
+
     Route::prefix('settings')->as('settings.')->group(function(){
         Route::get('stripe',[SettingController::class,'stripe'])->name('stripe');
+        Route::post('stripe',[SettingController::class,'stripe'])->name('stripe');
     });
 
 });
