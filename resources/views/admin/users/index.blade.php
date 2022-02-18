@@ -63,10 +63,10 @@
                 $(this).parent().submit();
             }else if($(this).val() == 'purhis'){
                 let userId = $(this).find('option:selected').attr('id');
-                window.location.href = `lms_app/user/${userId}/purchaseHistory`;
+                window.location.href = `/user/${userId}/purchaseHistory`;
             }else if($(this).val() == 'actCrs'){
                 let userId = $(this).find('option:selected').attr('id');
-                window.location.href = `lms_app/user/${userId}/activeCourses`;
+                window.location.href = `/user/${userId}/activeCourses`;
             }
         })
     })
