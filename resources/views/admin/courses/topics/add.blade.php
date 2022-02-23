@@ -45,7 +45,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-md-12 singleType">
+                                    <div class="col-md-12 singleType" quesNo="0">
                                         <div class="form-group row">
                                             <div class="col-md-12">
                                                 <div class="form-group row">
@@ -66,6 +66,7 @@
                                                     <option value="2">pdf</option>
                                                     <option value="3">Address Url</option>
                                                     <option value="4">text</option>
+                                                    <option value="5">Quiz</option>
                                                 </select>
                                             </div>
                                         </div>
@@ -76,6 +77,68 @@
                                                     <div class="col-md-8">
                                                         <input type="text" name="videoLink[]"
                                                             class="form-control border-primary field"  >
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-12 optionTab quiz" style="display: none">
+                                                <div class="col-12 d-flex justify-content-end my-2">
+                                                    <button class="btn btn-success btn-sm addMore" ><i class="fas fa-add"></i> Add More Question</button>
+                                                </div>
+                                                <div class="row ques" quizNo=0>
+                                                    <div class="col-md-12">
+                                                        <div class="form-group row">
+                                                            <label class="col-md-2 label-control" for="userinput1">Heading</label>
+                                                            <div class="col-md-8">
+                                                                <input type="text" name="heading[0][]" prefix="heading"
+                                                                    class="form-control border-primary quesField field" placeholder="Heading" >
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-12">
+                                                        <div class="form-group row">
+                                                            <label class="col-md-2 label-control" for="userinput1">Correct Option</label>
+                                                            <div class="col-md-8">
+                                                                <select name="c_opt[0][]" prefix="c_opt" class="form-control quesField field" >
+                                                                    <option value="">----Select-----</option>
+                                                                        <option value="opt_1">Option(1)</option>
+                                                                        <option value="opt_2">Option(2)</option>
+                                                                        <option value="opt_3">Option(3)</option>
+                                                                        <option value="opt_4">Option(4)</option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div class="form-group row">
+                                                            <label class="col-md-3 label-control" for="userinput1">Option(1)</label>
+                                                            <div class="col-md-8">
+                                                                <input type="text" name="opt_1[0][]" prefix="opt_1"  class="form-control quesField field" >
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div class="form-group row">
+                                                            <label class="col-md-3 label-control" for="userinput1">Option(2)</label>
+                                                            <div class="col-md-8">
+                                                                <input type="text" name="opt_2[0][]" prefix="opt_2" class="form-control quesField field" >
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div class="form-group row">
+                                                            <label class="col-md-3 label-control" for="userinput1">Option(3)</label>
+                                                            <div class="col-md-8">
+                                                                <input type="text" name="opt_3[0][]" prefix="opt_3" class="form-control quesField field" >
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div class="form-group row">
+                                                            <label class="col-md-3 label-control" for="userinput1">Option(4)</label>
+                                                            <div class="col-md-8">
+                                                                <input type="text" name="opt_4[0][]" prefix="opt_4"  class="form-control quesField field" >
+                                                            </div>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -126,10 +189,26 @@
     <script>
         window.addEventListener('load',function(){
 
+            var quizQuestionCount = 0;
+            function questionCountManger(action='',parentDiv='')
+            {
+                let lastQuestion = $('.ques').last().attr('quizNo');
+                if(action == 'add'){
+                    alert('callled');
+                    quizQuestionsNameManger(parentDiv);
+                    quizQuestionCount = parseInt(lastQuestion)+1;
+                }else if(action == 'delete'){
+                    let typeDropdown = parentDiv.find('.typeDropdown');
+                        if(typeDropdown.val() == 5){
+                            quizQuestionCount--;
+                        }
+                }
+            }
+
             $('#addMore').on('click',function(event){
                 event.preventDefault();
                 let topicWrapper = $('#topicWrapper');
-                let type = `<div class="col-md-12 singleType">
+                let type = `<div class="col-md-12 singleType" quesNo="${quizQuestionCount}">
                                     <div class="col-12 d-flex justify-content-end my-2">
                                         <button type="button" class="btn btn-danger btn-sm deleteTopic" ><i class="fas fa-trash"></i> Delete</button>
                                     </div>
@@ -153,24 +232,87 @@
                                                     <option value="2">pdf</option>
                                                     <option value="3">Address Url</option>
                                                     <option value="4">text</option>
+                                                    <option value="5">Quiz</option>
                                                 </select>
                                             </div>
                                         </div>
                                         <div class="row">
-                                            <div class="col-md-12 optionTab text" style="display: none">
-                                                <div class="form-group row">
-                                                    <label class="col-md-2 label-control" for="userinput1">text</label>
-                                                    <div class="col-md-8">
-                                                       <textarea name="text[]" class="form-control field" placeholder="Enter Comma Seprated Links"  rows="5"></textarea>
-                                                    </div>
-                                                </div>
-                                            </div>
                                             <div class="col-md-12 optionTab videoLink" style="display: none">
                                                 <div class="form-group row">
                                                     <label class="col-md-2 label-control" for="userinput1">Video Link</label>
                                                     <div class="col-md-8">
                                                         <input type="text" name="videoLink[]"
                                                             class="form-control border-primary field"  >
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-12 optionTab quiz" style="display: none">
+                                                <div class="col-12 d-flex justify-content-end my-2">
+                                                    <button class="btn btn-success btn-sm addMore" ><i class="fas fa-add"></i> Add More Question</button>
+                                                </div>
+                                                <div class="row ques" quizNo="${quizQuestionCount}">
+                                                    <div class="col-md-12">
+                                                        <div class="form-group row">
+                                                            <label class="col-md-2 label-control" for="userinput1">Heading</label>
+                                                            <div class="col-md-8">
+                                                                <input type="text" name="heading[0][]" prefix="heading"
+                                                                    class="form-control border-primary quesField field" placeholder="Heading" >
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-12">
+                                                        <div class="form-group row">
+                                                            <label class="col-md-2 label-control" for="userinput1">Correct Option</label>
+                                                            <div class="col-md-8">
+                                                                <select name="c_opt[0][]" prefix="c_opt" class="form-control quesField field" >
+                                                                    <option value="">----Select-----</option>
+                                                                        <option value="opt_1">Option(1)</option>
+                                                                        <option value="opt_2">Option(2)</option>
+                                                                        <option value="opt_3">Option(3)</option>
+                                                                        <option value="opt_4">Option(4)</option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div class="form-group row">
+                                                            <label class="col-md-3 label-control" for="userinput1">Option(1)</label>
+                                                            <div class="col-md-8">
+                                                                <input type="text" name="opt_1[0][]" prefix="opt_1"  class="form-control quesField field" >
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div class="form-group row">
+                                                            <label class="col-md-3 label-control" for="userinput1">Option(2)</label>
+                                                            <div class="col-md-8">
+                                                                <input type="text" name="opt_2[0][]" prefix="opt_2" class="form-control quesField field" >
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div class="form-group row">
+                                                            <label class="col-md-3 label-control" for="userinput1">Option(3)</label>
+                                                            <div class="col-md-8">
+                                                                <input type="text" name="opt_3[0][]" prefix="opt_3" class="form-control quesField field" >
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div class="form-group row">
+                                                            <label class="col-md-3 label-control" for="userinput1">Option(4)</label>
+                                                            <div class="col-md-8">
+                                                                <input type="text" name="opt_4[0][]" prefix="opt_4"  class="form-control quesField field" >
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-12 optionTab text" style="display: none">
+                                                <div class="form-group row">
+                                                    <label class="col-md-2 label-control" for="userinput1">text</label>
+                                                    <div class="col-md-8">
+                                                       <textarea name="text[]" class="form-control field"  rows="5"></textarea>
                                                     </div>
                                                 </div>
                                             </div>
@@ -200,13 +342,15 @@
                 event.preventDefault();
                 let r = confirm('Are You Sure You Want to Delete?');
                 if(r){
-                    $(this).parent().parent().remove();
+                    let parentDive = $(this).parent().parent();
+                    questionCountManger('delete',parentDive);
+                    parentDive.remove();
                 }
             });
 
+
             function manageOptions(current = '',parent = '') {
-                console.log(current);
-                console.log(parent);
+
                 let allOptions = parent.find('.optionTab');
                 let currentClassName = '.'+current;
                 let nameForCurrent = current+'Name[]';
@@ -214,6 +358,7 @@
                 parent.find(currentClassName).show();
                 parent.find('.name').attr('name',nameForCurrent);
                 parent.find('.field').attr('required',true);
+                current == 'quiz' ? questionCountManger('add',parent) : '';
 
                 allOptions.each(function(){
                     if(!$(this).hasClass(current)){
@@ -221,6 +366,18 @@
                         $(this).find('.field').val(null);
                         $(this).hide();
                     }
+                })
+            }
+
+            function quizQuestionsNameManger(parent = '')
+            {
+                let quizQuesFields = parent.find('.quesField');
+                let count = parent.find('.ques').attr('quizNo');
+                alert(count);
+                quizQuesFields.each(function(){
+                    let prefix = $(this).attr('prefix');
+                    let name = `${prefix}[${count}][]`;
+                    $(this).attr('name',name);
                 })
             }
 
@@ -243,7 +400,90 @@
                 {
                     manageOptions('text',parent);
                 }
+                else if(selectedValue == 5)
+                {
+                    manageOptions('quiz',parent);
+                }
             });
+
+
+            $( "#topicWrapper" ).delegate( ".addMore", "click", function(event) {
+                event.preventDefault();
+                let currentQuizQuestionWrapper = $(this).parent().parent();
+                console.log(currentQuizQuestionWrapper);
+                let ques = `<div class="row ques">
+                                    <div class="col-12 d-flex justify-content-end my-2">
+                                        <button type="button" class="btn btn-danger btn-sm deleteQues" ><i class="fas fa-trash"></i> Delete Question</button>
+                                    </div>
+                                    <div class="col-md-12">
+                                                        <div class="form-group row">
+                                                            <label class="col-md-2 label-control" for="userinput1">Heading</label>
+                                                            <div class="col-md-8">
+                                                                <input type="text" name="heading[${quizQuestionCount}][]" prefix="heading"
+                                                                    class="form-control border-primary quesField field" placeholder="Heading" required>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-12">
+                                                        <div class="form-group row">
+                                                            <label class="col-md-2 label-control" for="userinput1">Correct Option</label>
+                                                            <div class="col-md-8">
+                                                                <select name="c_opt[${quizQuestionCount}][]" prefix="c_opt" class="form-control quesField field" required>
+                                                                    <option value="">----Select-----</option>
+                                                                        <option value="opt_1">Option(1)</option>
+                                                                        <option value="opt_2">Option(2)</option>
+                                                                        <option value="opt_3">Option(3)</option>
+                                                                        <option value="opt_4">Option(4)</option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div class="form-group row">
+                                                            <label class="col-md-3 label-control" for="userinput1">Option(1)</label>
+                                                            <div class="col-md-8">
+                                                                <input type="text" name="opt_1[${quizQuestionCount}][]" prefix="opt_1"  class="form-control quesField field" required>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div class="form-group row">
+                                                            <label class="col-md-3 label-control" for="userinput1">Option(2)</label>
+                                                            <div class="col-md-8">
+                                                                <input type="text" name="opt_2[${quizQuestionCount}][]" prefix="opt_2" class="form-control quesField field" required>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div class="form-group row">
+                                                            <label class="col-md-3 label-control" for="userinput1">Option(3)</label>
+                                                            <div class="col-md-8">
+                                                                <input type="text" name="opt_3[${quizQuestionCount}][]" prefix="opt_3" class="form-control quesField field" required>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div class="form-group row">
+                                                            <label class="col-md-3 label-control" for="userinput1">Option(4)</label>
+                                                            <div class="col-md-8">
+                                                                <input type="text" name="opt_4[${quizQuestionCount}][]" prefix="opt_4"  class="form-control quesField field" required>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                </div>`;
+                    currentQuizQuestionWrapper.append(ques);
+                    quizQuestionsNameManger(currentQuizQuestionWrapper);
+            });
+
+            $( "#topicWrapper" ).delegate( ".deleteQues", "click", function(event) {
+                event.preventDefault();
+                let r = confirm('Are You Sure You Want to Delete?');
+                if(r){
+                    $(this).parent().parent().remove();
+                }
+            });
+
+
 
             $('.nextBtn').on('click',function(){
                 $('#nextStatus').val('next');

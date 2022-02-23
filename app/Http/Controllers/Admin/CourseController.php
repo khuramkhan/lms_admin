@@ -35,6 +35,7 @@ class CourseController extends Controller
                 }
             }
         }
+        
 
         $courses = Course::with('topics.topicDetail')->get()->each(function($course) use($userPurchaseCourses){
             $course->is_purchased = false;
