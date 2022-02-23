@@ -27,12 +27,12 @@ class CourseController extends Controller
                return back()->with('error', $validate->errors()->messages()['coverImage'][0]);
             }
 
+            $data = $request->all();
             $imageName = time().'.'.$request->file('coverImage')->extension();
             $request->file('coverImage')->move(public_path('images/CoverImages'), $imageName);
             $imageName = 'images/CoverImages/' . $imageName;
             $data['coverImage'] = $imageName;
 
-            $data = $request->all();
             $course = Course::create($data);
             $courseID = $course->id;
             return redirect()->route('course.addTopic',['courseID' => $courseID]);
