@@ -378,28 +378,28 @@
             var quizQuestionCount = -1 ;
             function questionCountManger(action='',parentDiv='')
             {
-                alert('hello');
-                let count = 0;
-                $('.singleType').each(function(){
-                    let typeDropdown = $(this).find('.typeDropdown');
-                    if(typeDropdown.val() == 5){
-                        let ques = $(this).find('.ques');
-                        let quizQuesFields = $(this).find('.quesField');
-                        ques.attr('quizNo',count);
-                        quizQuesFields.each(function(){
-                            let prefix = $(this).attr('prefix');
-                            let name = `${prefix}[${count}][]`;
-                            $(this).attr('name',name);
-                        })
-                        count++;
-                    }
-                })
+                let lastQuestion = $('.ques').last().attr('quizNo');
+                if(action == 'add'){
+                    quizQuestionCount = parseInt(lastQuestion)+1;
+                    parentDiv.find('.ques').attr('quizNo',quizQuestionCount);
+                    quizQuestionsNameManger(parentDiv);
+                }else if(action == 'delete'){
+                    let typeDropdown = parentDiv.find('.typeDropdown');
+                        if(typeDropdown.val() == 5){
+                            quizQuestionCount--;
+                        }
+                }
             }
 
 
 
             $('#addMore').on('click',function(event){
                 event.preventDefault();
+                let lastQuestionNoDiv = $('.ques').last();
+                let lastQuestionNo = -1;
+                lastQuestionNo = lastQuestionNoDiv.length > 0 ? lastQuestionNoDiv.attr('quizNo') : lastQuestionNo;
+                alert(lastQuestionNo);
+                lastQuestionNo = parseInt(lastQuestionNo);
                 let topicWrapper = $('#topicWrapper');
                 let type = `<div class="col-md-12 singleType" quesNo="${quizQuestionCount}">
                                     <div class="col-12 d-flex justify-content-end my-2">
@@ -534,6 +534,7 @@
             $( "#topicWrapper" ).delegate( ".addMore", "click", function(event) {
                 event.preventDefault();
                 let currentQuizQuestionWrapper = $(this).parent().parent();
+
                 let ques = `<div class="row ques">
                                     <div class="col-12 d-flex justify-content-end my-2">
                                         <button type="button" class="btn btn-danger btn-sm deleteQues" ><i class="fas fa-trash"></i> Delete Question</button>
@@ -595,7 +596,7 @@
                                                     </div>
                                 </div>`;
                     currentQuizQuestionWrapper.append(ques);
-                    questionCountManger();
+                    quizQuestionsNameManger(currentQuizQuestionWrapper);
             });
 
             $( "#topicWrapper" ).delegate( ".deleteTopic", "click", function(event) {
@@ -603,6 +604,7 @@
                 let r = confirm('Are You Sure You Want to Delete?');
                 if(r){
                     let parentDive = $(this).parent().parent();
+                    questionCountManger('delete',parentDive);
                     parentDive.remove();
                 }
             });
@@ -625,6 +627,19 @@
                         $(this).find('.field').val(null);
                         $(this).hide();
                     }
+                })
+            }
+
+            function quizQuestionsNameManger(parent = '')
+            {
+                let quizQuesFields = parent.find('.quesField');
+                let count = parent.find('.ques').attr('quizNo');
+                alert(count);
+                alert('name manger called');
+                quizQuesFields.each(function(){
+                    let prefix = $(this).attr('prefix');
+                    let name = `${prefix}[${count}][]`;
+                    $(this).attr('name',name);
                 })
             }
 

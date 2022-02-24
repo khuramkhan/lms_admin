@@ -84,7 +84,7 @@
                                                 <div class="col-12 d-flex justify-content-end my-2">
                                                     <button class="btn btn-success btn-sm addMore" ><i class="fas fa-add"></i> Add More Question</button>
                                                 </div>
-                                                <div class="row ques" quizNo=0>
+                                                <div class="row ques" quizNo=-1>
                                                     <div class="col-md-12">
                                                         <div class="form-group row">
                                                             <label class="col-md-2 label-control" for="userinput1">Heading</label>
@@ -189,7 +189,7 @@
     <script>
         window.addEventListener('load',function(){
 
-            var quizQuestionCount = -1;
+            var quizQuestionCount = -1 ;
             function questionCountManger(action='',parentDiv='')
             {
                 let lastQuestion = $('.ques').last().attr('quizNo');
@@ -411,7 +411,7 @@
             $( "#topicWrapper" ).delegate( ".addMore", "click", function(event) {
                 event.preventDefault();
                 let currentQuizQuestionWrapper = $(this).parent().parent();
-                console.log(currentQuizQuestionWrapper);
+
                 let ques = `<div class="row ques">
                                     <div class="col-12 d-flex justify-content-end my-2">
                                         <button type="button" class="btn btn-danger btn-sm deleteQues" ><i class="fas fa-trash"></i> Delete Question</button>
