@@ -16,7 +16,7 @@ class CourseTopic extends Model
 
     public function topicDetail()
     {
-        return $this->hasMany(TopicDetail::class,'topic_id');
+        return $this->hasMany(TopicDetail::class,'topic_id')->with('quizQuestions');
     }
 
     public function course()

@@ -33,7 +33,7 @@
                                             {{-- <div class="col-md-1"></div> --}}
                                             <div class="col-md-4">
                                                 <div class="card mx-auto d-block" style="width: 18rem;">
-                                                    <img class="card-img-top" src="{{ asset('storage') }}/{{ $course->coverImage }}" alt="Card image cap">
+                                                    <img class="card-img-top" src="{{ asset('') }}{{ $course->coverImage }}" alt="Card image cap">
 
                                                   </div>
                                             </div>
