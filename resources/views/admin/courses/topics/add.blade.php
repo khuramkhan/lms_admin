@@ -193,7 +193,7 @@
             function questionCountManger(action='',parentDiv='')
             {
                 let lastQuestion = $('.ques').last().attr('quizNo');
-                
+
                 if(action == 'add'){
                     quizQuestionCount = parseInt(lastQuestion)+1;
                     parentDiv.find('.ques').attr('quizNo',quizQuestionCount);
@@ -374,7 +374,7 @@
             {
                 let quizQuesFields = parent.find('.quesField');
                 let count = parent.find('.ques').attr('quizNo');
-                alert(count);
+                // alert(count);
                 quizQuesFields.each(function(){
                     let prefix = $(this).attr('prefix');
                     let name = `${prefix}[${count}][]`;
