@@ -189,14 +189,15 @@
     <script>
         window.addEventListener('load',function(){
 
-            var quizQuestionCount = 0;
+            var quizQuestionCount = -1;
             function questionCountManger(action='',parentDiv='')
             {
                 let lastQuestion = $('.ques').last().attr('quizNo');
+                
                 if(action == 'add'){
-                    alert('callled');
-                    quizQuestionsNameManger(parentDiv);
                     quizQuestionCount = parseInt(lastQuestion)+1;
+                    parentDiv.find('.ques').attr('quizNo',quizQuestionCount);
+                    quizQuestionsNameManger(parentDiv);
                 }else if(action == 'delete'){
                     let typeDropdown = parentDiv.find('.typeDropdown');
                         if(typeDropdown.val() == 5){
