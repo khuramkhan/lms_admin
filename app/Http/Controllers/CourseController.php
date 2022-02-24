@@ -30,7 +30,7 @@ class CourseController extends Controller
             $data = $request->all();
             $imageName = time().'.'.$request->file('coverImage')->extension();
             $request->file('coverImage')->move(public_path('images/CoverImages'), $imageName);
-            $imageName = 'images/CoverImages/' . $imageName;
+            $imageName = 'public/images/CoverImages/' . $imageName;
             $data['coverImage'] = $imageName;
 
             $course = Course::create($data);
@@ -140,8 +140,8 @@ class CourseController extends Controller
                 foreach($pdfs as $pdf)
                 {
                     $imageName = time().'.'.$pdf->extension();
-                    $pdf->move(public_path('images/Topic_PDF'), $imageName);
-                    $imageName = 'images/Topic_PDF/' . $imageName;
+                    $pdf->move(public_path('PDF/Topic_PDF'), $imageName);
+                    $imageName = 'public/PDF/Topic_PDF/' . $imageName;
 
                     TopicDetail::create([
                         'name' => $request->pdfName[$count],
@@ -195,7 +195,7 @@ class CourseController extends Controller
             if($request->hasFile('coverImage')){
                 $imageName = time().'.'.$request->file('coverImage')->extension();
                 $request->file('coverImage')->move(public_path('images/CoverImages'), $imageName);
-                $imageName = 'images/CoverImages/' . $imageName;
+                $imageName = 'public/images/CoverImages/' . $imageName;
                 $data['coverImage'] = $imageName;
             }
              $course->update($data);
@@ -279,8 +279,8 @@ class CourseController extends Controller
                 foreach($pdfs as $pdf)
                 {
                     $imageName = time().'.'.$pdf->extension();
-                    $pdf->move(public_path('images/Topic_PDF'), $imageName);
-                    $imageName = 'images/Topic_PDF/' . $imageName;
+                    $pdf->move(public_path('PDF/Topic_PDF'), $imageName);
+                    $imageName = 'public/PDF/Topic_PDF/' . $imageName;
 
                     TopicDetail::create([
                         'name' => $request->pdfName[$count],
