@@ -325,24 +325,6 @@ class CourseController extends Controller
                 }
             }
 
-            // if(!empty($request->pdf))
-            // {
-            //     $pdfs = array_filter($request->pdf, fn($value) => !is_null($value) && $value !== '');
-            //     $count = 0;
-            //     foreach($pdfs as $pdf)
-            //     {
-            //         $imageName = time().'.'.$pdf->extension();
-            //         $pdf->move(public_path('PDF/Topic_PDF'), $imageName);
-            //         $imageName = 'public/PDF/Topic_PDF/' . $imageName;
-
-            //         TopicDetail::create([
-            //             'name' => $request->pdfName[$count],
-            //             'topic_id' => $topic->id,
-            //             'pdf' => $imageName,
-            //         ]);
-            //         $count++;
-            //     }
-            // }
             if($request->next == 'next'){
                 return back()->with('success','Topic has been added successfully');
             }
