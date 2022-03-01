@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\CourseController;
+use App\Http\Controllers\Admin\QuizController;
 use App\Http\Controllers\Auth\UserController;
 use App\Models\Course;
 use Illuminate\Http\Request;
@@ -37,6 +38,7 @@ Route::middleware('auth:api')->group( function () {
         Route::post('purchaseHistory',[CourseController::class,'purchaseHistory']);
         Route::post('subscriptions',[CourseController::class,'subscriptions']);
         Route::post('updateProfile',[UserController::class,'updateProfile']);
+        Route::post('quizTest',[QuizController::class,'saveQuizTest']);
     });
 
 });

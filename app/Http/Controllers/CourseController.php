@@ -225,7 +225,6 @@ class CourseController extends Controller
             }
 
             $prePdfFiles = isset($request->prePdf) ? array_filter($request->prePdf) : [];
-
             $preDetail = $topic->topicDetail()->whereNotIn('id',$prePdfFiles)->delete();
 
             $topic->update([
@@ -247,6 +246,7 @@ class CourseController extends Controller
                         'name' => $request->pdfName[$count],
                         'topic_id' => $topic->id,
                         'pdf' => $imageName,
+                        'type' => 'pdf',
                     ]);
                     $count++;
                 }
@@ -290,7 +290,8 @@ class CourseController extends Controller
                     TopicDetail::create([
                         'name' => $request->videoLinkName[$count],
                         'topic_id' => $topic->id,
-                        'videoLink' => $videoLink
+                        'videoLink' => $videoLink,
+                        'type' => 'videoLink'
                     ]);
                 }
                 $count++;
@@ -303,7 +304,8 @@ class CourseController extends Controller
                     TopicDetail::create([
                         'name' => $request->addressUrlName[$count],
                         'topic_id' => $topic->id,
-                        'addressUrl' => $addressUrl
+                        'addressUrl' => $addressUrl,
+                        'type' => 'addressUrl'
                     ]);
                     $count++;
                 }
@@ -316,30 +318,13 @@ class CourseController extends Controller
                     TopicDetail::create([
                         'name' => $request->textName[$count],
                         'topic_id' => $topic->id,
-                        'text' => $text
+                        'text' => $text,
+                        'type' => 'text'
                     ]);
                     $count++;
                 }
             }
 
-            // if(!empty($request->pdf))
-            // {
-            //     $pdfs = array_filter($request->pdf, fn($value) => !is_null($value) && $value !== '');
-            //     $count = 0;
-            //     foreach($pdfs as $pdf)
-            //     {
-            //         $imageName = time().'.'.$pdf->extension();
-            //         $pdf->move(public_path('PDF/Topic_PDF'), $imageName);
-            //         $imageName = 'public/PDF/Topic_PDF/' . $imageName;
-
-            //         TopicDetail::create([
-            //             'name' => $request->pdfName[$count],
-            //             'topic_id' => $topic->id,
-            //             'pdf' => $imageName,
-            //         ]);
-            //         $count++;
-            //     }
-            // }
             if($request->next == 'next'){
                 return back()->with('success','Topic has been added successfully');
             }
