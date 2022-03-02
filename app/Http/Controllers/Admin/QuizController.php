@@ -52,7 +52,7 @@ class QuizController extends Controller
             }
         }
 
-        $validSelectedOptions = ['opt_1' , 'opt_2', 'opt_3', 'opt_4'];
+        $validSelectedOptions = ['opt_1' , 'opt_2', 'opt_3', 'opt_4',''];
 
         foreach($data['questions'] as $question)
         {

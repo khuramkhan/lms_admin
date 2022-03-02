@@ -98,9 +98,8 @@
                                                         <div class="form-group row">
                                                             <label class="col-md-2 label-control" for="userinput1">Question Type</label>
                                                             <div class="col-md-8">
-                                                                <select name="qT[0][]" class="form-control quesType quesField field" prefix="qT">
-                                                                    <option value="">--Select--</option>
-                                                                    <option value="text">Text</option>
+                                                                <select name="quesType[0][]" class="form-control quesType quesField" prefix="quesType">
+                                                                    <option value="text" selected>Text</option>
                                                                     <option value="image">Image</option>
                                                                 </select>
                                                             </div>
@@ -120,7 +119,7 @@
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <div class="col-md-6 textOption d-none">
+                                                    <div class="col-md-6 textOption">
                                                         <div class="form-group row">
                                                             <label class="col-md-3 label-control" for="userinput1">Option(1)</label>
                                                             <div class="col-md-8">
@@ -128,7 +127,7 @@
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <div class="col-md-6 textOption d-none">
+                                                    <div class="col-md-6 textOption">
                                                         <div class="form-group row">
                                                             <label class="col-md-3 label-control" for="userinput1">Option(2)</label>
                                                             <div class="col-md-8">
@@ -136,7 +135,7 @@
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <div class="col-md-6 textOption d-none">
+                                                    <div class="col-md-6 textOption">
                                                         <div class="form-group row">
                                                             <label class="col-md-3 label-control" for="userinput1">Option(3)</label>
                                                             <div class="col-md-8">
@@ -144,7 +143,7 @@
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <div class="col-md-6 textOption d-none">
+                                                    <div class="col-md-6 textOption">
                                                         <div class="form-group row">
                                                             <label class="col-md-3 label-control" for="userinput1">Option(4)</label>
                                                             <div class="col-md-8">
@@ -236,21 +235,18 @@
             var quizQuestionCount = -1 ;
             function questionCountManger(action='',parentDiv='')
             {
-                let count = 0;
-                $('.singleType').each(function(){
-                    let typeDropdown = $(this).find('.typeDropdown');
-                    if(typeDropdown.val() == 5){
-                        let ques = $(this).find('.ques');
-                        let quizQuesFields = $(this).find('.quesField');
-                        ques.attr('quizNo',count);
-                        quizQuesFields.each(function(){
-                            let prefix = $(this).attr('prefix');
-                            let name = `${prefix}[${count}][]`;
-                            $(this).attr('name',name);
-                        })
-                        count++;
-                    }
-                })
+                let lastQuestion = $('.ques').last().attr('quizNo');
+
+                if(action == 'add'){
+                    quizQuestionCount = parseInt(lastQuestion)+1;
+                    parentDiv.find('.ques').attr('quizNo',quizQuestionCount);
+                    quizQuestionsNameManger(parentDiv);
+                }else if(action == 'delete'){
+                    let typeDropdown = parentDiv.find('.typeDropdown');
+                        if(typeDropdown.val() == 5){
+                            quizQuestionCount--;
+                        }
+                }
             }
 
             $('#addMore').on('click',function(event){
@@ -312,9 +308,8 @@
                                                         <div class="form-group row">
                                                             <label class="col-md-2 label-control" for="userinput1">Question Type</label>
                                                             <div class="col-md-8">
-                                                                <select name="quesType" class="form-control quesType quesField field" prefix="qT">
-                                                                    <option value="">--Select--</option>
-                                                                    <option value="text">Text</option>
+                                                                <select name="quesType" class="form-control quesType quesField" prefix="quesType">
+                                                                    <option value="text" selected>Text</option>
                                                                     <option value="image">Image</option>
                                                                 </select>
                                                             </div>
@@ -334,7 +329,7 @@
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <div class="col-md-6 textOption d-none">
+                                                    <div class="col-md-6 textOption">
                                                         <div class="form-group row">
                                                             <label class="col-md-3 label-control" for="userinput1">Option(1)</label>
                                                             <div class="col-md-8">
@@ -342,7 +337,7 @@
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <div class="col-md-6 textOption d-none">
+                                                    <div class="col-md-6 textOption">
                                                         <div class="form-group row">
                                                             <label class="col-md-3 label-control" for="userinput1">Option(2)</label>
                                                             <div class="col-md-8">
@@ -350,7 +345,7 @@
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <div class="col-md-6 textOption d-none">
+                                                    <div class="col-md-6 textOption">
                                                         <div class="form-group row">
                                                             <label class="col-md-3 label-control" for="userinput1">Option(3)</label>
                                                             <div class="col-md-8">
@@ -358,7 +353,7 @@
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <div class="col-md-6 textOption d-none">
+                                                    <div class="col-md-6 textOption">
                                                         <div class="form-group row">
                                                             <label class="col-md-3 label-control" for="userinput1">Option(4)</label>
                                                             <div class="col-md-8">
@@ -461,6 +456,18 @@
                 })
             }
 
+            function quizQuestionsNameManger(parent = '')
+            {
+                let quizQuesFields = parent.find('.quesField');
+                let count = parent.find('.ques').attr('quizNo');
+                // alert(count);
+                quizQuesFields.each(function(){
+                    let prefix = $(this).attr('prefix');
+                    let name = `${prefix}[${count}][]`;
+                    $(this).attr('name',name);
+                })
+            }
+
             $( "#topicWrapper" ).delegate( ".typeDropdown", "change", function(event) {
                 let parent = $(this).parent().parent().parent();
                 let selectedValue = $(this).find('option:selected').val();
@@ -508,9 +515,8 @@
                                                         <div class="form-group row">
                                                             <label class="col-md-2 label-control" for="userinput1">Question Type</label>
                                                             <div class="col-md-8">
-                                                                <select name="quesType[${quizQuestionCount}][]" class="form-control quesType quesField field" prefix="qT">
-                                                                    <option value="">--Select--</option>
-                                                                    <option value="text">Text</option>
+                                                                <select name="quesType[${quizQuestionCount}][]" class="form-control quesType quesField" prefix="quesType">
+                                                                    <option value="text" selected>Text</option>
                                                                     <option value="image">Image</option>
                                                                 </select>
                                                             </div>
@@ -530,7 +536,7 @@
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <div class="col-md-6 textOption d-none">
+                                                    <div class="col-md-6 textOption">
                                                         <div class="form-group row">
                                                             <label class="col-md-3 label-control" for="userinput1">Option(1)</label>
                                                             <div class="col-md-8">
@@ -538,7 +544,7 @@
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <div class="col-md-6 textOption d-none">
+                                                    <div class="col-md-6 textOption">
                                                         <div class="form-group row">
                                                             <label class="col-md-3 label-control" for="userinput1">Option(2)</label>
                                                             <div class="col-md-8">
@@ -546,7 +552,7 @@
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <div class="col-md-6 textOption d-none">
+                                                    <div class="col-md-6 textOption">
                                                         <div class="form-group row">
                                                             <label class="col-md-3 label-control" for="userinput1">Option(3)</label>
                                                             <div class="col-md-8">
@@ -554,7 +560,7 @@
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <div class="col-md-6 textOption d-none">
+                                                    <div class="col-md-6 textOption">
                                                         <div class="form-group row">
                                                             <label class="col-md-3 label-control" for="userinput1">Option(4)</label>
                                                             <div class="col-md-8">
@@ -596,7 +602,7 @@
                                                     </div>
                                 </div>`;
                     currentQuizQuestionWrapper.append(ques);
-                    questionCountManger()
+                    quizQuestionsNameManger(currentQuizQuestionWrapper);
             });
 
             $( "#topicWrapper" ).delegate( ".deleteQues", "click", function(event) {

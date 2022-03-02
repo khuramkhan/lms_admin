@@ -378,7 +378,6 @@
             var quizQuestionCount = -1 ;
             function questionCountManger(action='',parentDiv='')
             {
-                alert('hello');
                 let count = 0;
                 $('.singleType').each(function(){
                     let typeDropdown = $(this).find('.typeDropdown');
