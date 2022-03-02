@@ -171,7 +171,8 @@ class CourseController extends Controller
                                 'opt_2' => $opt2,
                                 'opt_3' => $opt3,
                                 'opt_4' => $opt4,
-                                'c_opt' => $copt
+                                'c_opt' => $copt,
+                                'ques_type' => $quesType
                             ]);
 
                         $parentCount++;
