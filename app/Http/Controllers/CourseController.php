@@ -8,6 +8,7 @@ use App\Models\TopicDetail;
 use App\Models\TopicQuestion;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redis;
+use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Validator;
 
 class CourseController extends Controller
@@ -46,7 +47,6 @@ class CourseController extends Controller
         $course = Course::find($request->courseID);
         if(count($request->all()) > 0){
 
-            // dd($request->all());
             if(!empty($request->pdf)){
                 $validate = Validator::make($request->all(),[
                     'pdf.*' => 'mimes:pdf',
@@ -78,6 +78,7 @@ class CourseController extends Controller
                     $c_opt = array_filter($request->c_opt[$index], fn($value) => !is_null($value) && $value !== '');
                     $qTypes = array_filter($request->qT[$index], fn($value) => !is_null($value) && $value !== '');
 
+
                     $parentCount = 0;
                     foreach($qTypes as $quesType ){
 
@@ -89,38 +90,40 @@ class CourseController extends Controller
                         $copt = '';
 
                             $childCount=0;
-                            foreach($opt_1 as $op1){
+
+                            foreach($opt_1 as $op){
                                 if($childCount == $parentCount){
                                    if($quesType == 'image'){
-                                        $imageName = time().'.'.$op1->extension();
-                                        $op1->move(public_path('Images/Quiz_Images'), $imageName);
+                                        $imageName = Str::random(10).'.'.$op->extension();
+                                        $op->move(public_path('Images/Quiz_Images'), $imageName);
                                         $opt1 = 'public/Images/Quiz_Images/' . $imageName;
                                    }else{
-                                       $opt1 = $op1;
+                                       $opt1 = $op;
                                    }
                                 }
                                 $childCount++;
                             }
 
                             $childCount=0;
-                            foreach($opt_2 as $op2){
+                            foreach($opt_2 as $op){
                                 if($childCount == $parentCount){
                                     if($quesType == 'image'){
-                                        $imageName = time().'.'.$op2->extension();
-                                        $op2->move(public_path('Images/Quiz_Images'), $imageName);
+                                        $imageName = Str::random(10).'.'.$op->extension();
+                                        $op->move(public_path('Images/Quiz_Images'), $imageName);
                                         $opt2 = 'public/Images/Quiz_Images/' . $imageName;
                                    }else{
-                                       $opt2 = $op2;
+                                       $opt2 = $op;
                                    }
                                 }
                                 $childCount++;
                             }
+
 
                             $childCount=0;
                             foreach($opt_3 as $op3){
                                 if($childCount == $parentCount){
                                     if($quesType == 'image'){
-                                        $imageName = time().'.'.$op3->extension();
+                                        $imageName = Str::random(10).'.'.$op3->extension();
                                         $op3->move(public_path('Images/Quiz_Images'), $imageName);
                                         $opt3 = 'public/Images/Quiz_Images/' . $imageName;
                                    }else{
@@ -134,13 +137,9 @@ class CourseController extends Controller
                             foreach($opt_4 as $op4){
                                 if($childCount == $parentCount){
                                     if($quesType == 'image'){
-                                        try{
-                                                $imageName = time().'.'.$op4->extension();
-                                            $op4->move(public_path('Images/Quiz_Images'), $imageName);
-                                            $opt4 = 'public/Images/Quiz_Images/' . $imageName;
-                                        }catch(\Exception $e){
-                                            dd($op4);
-                                        }
+                                        $imageName = Str::random(10).'.'.$op4->extension();
+                                        $op4->move(public_path('Images/Quiz_Images'), $imageName);
+                                        $opt4 = 'public/Images/Quiz_Images/' . $imageName;
                                    }else{
                                        $opt4 = $op4;
                                    }
