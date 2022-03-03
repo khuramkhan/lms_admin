@@ -40,6 +40,7 @@ class CourseController extends Controller
         return view('admin.courses.add');
     }
 
+
     public function addTopic(Request $request)
     {
         $course = Course::find($request->courseID);
@@ -75,17 +76,106 @@ class CourseController extends Controller
                     $opt_3 = array_filter($request->opt_3[$index], fn($value) => !is_null($value) && $value !== '');
                     $opt_4 = array_filter($request->opt_4[$index], fn($value) => !is_null($value) && $value !== '');
                     $c_opt = array_filter($request->c_opt[$index], fn($value) => !is_null($value) && $value !== '');
+                    $qTypes = array_filter($request->qT[$index], fn($value) => !is_null($value) && $value !== '');
 
-                    foreach($headings as $i => $heading){
-                        TopicQuestion::create([
-                            'topic_detail_id' => $topicDetail->id,
-                            'heading' => $headings[$i],
-                            'opt_1' => $opt_1[$i],
-                            'opt_2' => $opt_2[$i],
-                            'opt_3' => $opt_3[$i],
-                            'opt_4' => $opt_4[$i],
-                            'c_opt' => $c_opt[$i]
-                        ]);
+                    $parentCount = 0;
+                    foreach($qTypes as $quesType ){
+
+                        $hd = '';
+                        $opt1 = '';
+                        $opt2 = '';
+                        $opt3 = '';
+                        $opt4 = '';
+                        $copt = '';
+
+                            $childCount=0;
+                            foreach($opt_1 as $op1){
+                                if($childCount == $parentCount){
+                                   if($quesType == 'image'){
+                                        $imageName = time().'.'.$op1->extension();
+                                        $op1->move(public_path('Images/Quiz_Images'), $imageName);
+                                        $opt1 = 'public/Images/Quiz_Images/' . $imageName;
+                                   }else{
+                                       $opt1 = $op1;
+                                   }
+                                }
+                                $childCount++;
+                            }
+
+                            $childCount=0;
+                            foreach($opt_2 as $op2){
+                                if($childCount == $parentCount){
+                                    if($quesType == 'image'){
+                                        $imageName = time().'.'.$op2->extension();
+                                        $op2->move(public_path('Images/Quiz_Images'), $imageName);
+                                        $opt2 = 'public/Images/Quiz_Images/' . $imageName;
+                                   }else{
+                                       $opt2 = $op2;
+                                   }
+                                }
+                                $childCount++;
+                            }
+
+                            $childCount=0;
+                            foreach($opt_3 as $op3){
+                                if($childCount == $parentCount){
+                                    if($quesType == 'image'){
+                                        $imageName = time().'.'.$op3->extension();
+                                        $op3->move(public_path('Images/Quiz_Images'), $imageName);
+                                        $opt3 = 'public/Images/Quiz_Images/' . $imageName;
+                                   }else{
+                                       $opt3 = $op3;
+                                   }
+                                }
+                                $childCount++;
+                            }
+
+                            $childCount=0;
+                            foreach($opt_4 as $op4){
+                                if($childCount == $parentCount){
+                                    if($quesType == 'image'){
+                                        try{
+                                                $imageName = time().'.'.$op4->extension();
+                                            $op4->move(public_path('Images/Quiz_Images'), $imageName);
+                                            $opt4 = 'public/Images/Quiz_Images/' . $imageName;
+                                        }catch(\Exception $e){
+                                            dd($op4);
+                                        }
+                                   }else{
+                                       $opt4 = $op4;
+                                   }
+                                }
+                                $childCount++;
+                            }
+
+                            $childCount = 0;
+                            foreach($c_opt as $cp){
+                                if($childCount == $parentCount){
+                                    $copt = $cp;
+                                }
+                                $childCount++;
+                            }
+
+                            $childCount = 0;
+                            foreach($headings as $h){
+                                if($childCount == $parentCount){
+                                    $hd = $h;
+                                }
+                                $childCount++;
+                            }
+
+                            TopicQuestion::create([
+                                'topic_detail_id' => $topicDetail->id,
+                                'heading' => $hd,
+                                'opt_1' => $opt1,
+                                'opt_2' => $opt2,
+                                'opt_3' => $opt3,
+                                'opt_4' => $opt4,
+                                'c_opt' => $copt,
+                                'ques_type' => $quesType
+                            ]);
+
+                        $parentCount++;
                     }
 
                 }
