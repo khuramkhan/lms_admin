@@ -300,7 +300,7 @@ class UserController extends Controller
 //            $path = str_replace('public/','',$path);
 
             $imageName = time().'.'.$request->file('profile_pic')->extension();
-            $request->file('profile_pic')->move(public_path('public/ProfilePic'), $imageName);
+            $request->file('profile_pic')->move(public_path('ProfilePic'), $imageName);
             $imageName = 'public/ProfilePic/' . $imageName;
             $user->profile_pic = $imageName;
         }
