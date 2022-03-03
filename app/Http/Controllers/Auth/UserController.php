@@ -296,9 +296,13 @@ class UserController extends Controller
 
         $user = User::find($request->user_id);
         if($request->hasFile('profile_pic')){
-            $path = $request->file('profile_pic')->store('public/ProfilePic');
-            $path = str_replace('public/','',$path);
-            $user->profile_pic = $path;
+//            $path = $request->file('profile_pic')->store('public/ProfilePic');
+//            $path = str_replace('public/','',$path);
+
+            $imageName = time().'.'.$request->file('profile_pic')->extension();
+            $request->file('profile_pic')->move(public_path('public/ProfilePic'), $imageName);
+            $imageName = 'public/ProfilePic/' . $imageName;
+            $user->profile_pic = $imageName;
         }
 
         $user->name = $request->name;
