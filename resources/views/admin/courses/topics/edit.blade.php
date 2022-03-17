@@ -31,7 +31,7 @@
                                 <div class="row" id="topic">
                                     <div class="col-md-12">
                                         <div class="form-group row">
-                                            <label class="col-md-2 label-control" for="userinput1">Topic</label>
+                                            <label class="col-md-2 label-control" for="userinput1">Topic <span class="text-danger">*</span></label>
                                             <div class="col-md-8">
                                                 <input type="text" name="topic" value="{{ $topic->topic }}"
                                                     class="form-control border-primary"  required>
@@ -159,7 +159,7 @@
                 var defaultQuestion = `    <div class="row ques" quizNo="-1">
                                                     <div class="col-md-12">
                                                         <div class="form-group row">
-                                                            <label class="col-md-2 label-control" for="userinput1">Heading</label>
+                                                            <label class="col-md-2 label-control" for="userinput1">Heading <span class="text-danger">*</span></label>
                                                             <div class="col-md-8">
                                                                 <input type="text" name="heading[0][]" prefix="heading"
                                                                     class="form-control border-primary quesField field" placeholder="Heading" >
@@ -168,7 +168,7 @@
                                                     </div>
                                                     <div class="col-md-12">
                                                         <div class="form-group row">
-                                                            <label class="col-md-2 label-control" for="userinput1">Correct Option</label>
+                                                            <label class="col-md-2 label-control" for="userinput1">Correct Option< <span class="text-danger">*</span>/label>
                                                             <div class="col-md-8">
                                                                 <select name="c_opt[0][]" prefix="c_opt" class="form-control quesField field" >
                                                                     <option value="">----Select-----</option>
@@ -182,7 +182,7 @@
                                                     </div>
                                                     <div class="col-md-6">
                                                         <div class="form-group row">
-                                                            <label class="col-md-3 label-control" for="userinput1">Option(1)</label>
+                                                            <label class="col-md-3 label-control" for="userinput1">Option(1) <span class="text-danger">*</span></label>
                                                             <div class="col-md-8">
                                                                 <input type="text" name="opt_1[0][]" prefix="opt_1"  class="form-control quesField field" >
                                                             </div>
@@ -190,7 +190,7 @@
                                                     </div>
                                                     <div class="col-md-6">
                                                         <div class="form-group row">
-                                                            <label class="col-md-3 label-control" for="userinput1">Option(2)</label>
+                                                            <label class="col-md-3 label-control" for="userinput1">Option(2) <span class="text-danger">*</span></label>
                                                             <div class="col-md-8">
                                                                 <input type="text" name="opt_2[0][]" prefix="opt_2" class="form-control quesField field" >
                                                             </div>
@@ -198,7 +198,7 @@
                                                     </div>
                                                     <div class="col-md-6">
                                                         <div class="form-group row">
-                                                            <label class="col-md-3 label-control" for="userinput1">Option(3)</label>
+                                                            <label class="col-md-3 label-control" for="userinput1">Option(3) <span class="text-danger">*</span></label>
                                                             <div class="col-md-8">
                                                                 <input type="text" name="opt_3[0][]" prefix="opt_3" class="form-control quesField field" >
                                                             </div>
@@ -206,7 +206,7 @@
                                                     </div>
                                                     <div class="col-md-6">
                                                         <div class="form-group row">
-                                                            <label class="col-md-3 label-control" for="userinput1">Option(4)</label>
+                                                            <label class="col-md-3 label-control" for="userinput1">Option(4) <span class="text-danger">*</span></label>
                                                             <div class="col-md-8">
                                                                 <input type="text" name="opt_4[0][]" prefix="opt_4"  class="form-control quesField field" >
                                                             </div>
@@ -239,7 +239,7 @@
                                                     ${randomQuestionCount > 0 ? deleteQuestionBtn : ''}
                                                     <div class="col-md-12">
                                                         <div class="form-group row">
-                                                            <label class="col-md-2 label-control" for="userinput1">Heading</label>
+                                                            <label class="col-md-2 label-control" for="userinput1">Heading <span class="text-danger">*</span></label>
                                                             <div class="col-md-8">
                                                                 <input type="text" name="heading[${qCount}][]" value="${question.heading}" prefix="heading"
                                                                     class="form-control border-primary quesField field" placeholder="Heading" >
@@ -248,7 +248,7 @@
                                                     </div>
                                                     <div class="col-md-12">
                                                         <div class="form-group row">
-                                                            <label class="col-md-2 label-control" for="userinput1">Correct Option</label>
+                                                            <label class="col-md-2 label-control" for="userinput1">Correct Option <span class="text-danger">*</span></label>
                                                             <div class="col-md-8">
                                                                 <select name="c_opt[${qCount}][]" prefix="c_opt" class="form-control quesField field" >
                                                                     <option value="">----Select-----</option>
@@ -262,7 +262,7 @@
                                                     </div>
                                                     <div class="col-md-6">
                                                         <div class="form-group row">
-                                                            <label class="col-md-3 label-control" for="userinput1">Option(1)</label>
+                                                            <label class="col-md-3 label-control" for="userinput1">Option(1) <span class="text-danger">*</span></label>
                                                             <div class="col-md-8">
                                                                 <input type="text" name="opt_1[${qCount}][]" prefix="opt_1" value="${question.opt_1}" class="form-control quesField field" >
                                                             </div>
@@ -270,7 +270,7 @@
                                                     </div>
                                                     <div class="col-md-6">
                                                         <div class="form-group row">
-                                                            <label class="col-md-3 label-control" for="userinput1">Option(2)</label>
+                                                            <label class="col-md-3 label-control" for="userinput1">Option(2) <span class="text-danger">*</span></label>
                                                             <div class="col-md-8">
                                                                 <input type="text" name="opt_2[${qCount}][]" prefix="opt_2" value="${question.opt_2}" class="form-control quesField field" >
                                                             </div>
@@ -278,7 +278,7 @@
                                                     </div>
                                                     <div class="col-md-6">
                                                         <div class="form-group row">
-                                                            <label class="col-md-3 label-control" for="userinput1">Option(3)</label>
+                                                            <label class="col-md-3 label-control" for="userinput1">Option(3) <span class="text-danger">*</span></label>
                                                             <div class="col-md-8">
                                                                 <input type="text" name="opt_3[${qCount}][]" prefix="opt_3" value="${question.opt_3}" class="form-control quesField field" >
                                                             </div>
@@ -286,7 +286,7 @@
                                                     </div>
                                                     <div class="col-md-6">
                                                         <div class="form-group row">
-                                                            <label class="col-md-3 label-control" for="userinput1">Option(4)</label>
+                                                            <label class="col-md-3 label-control" for="userinput1">Option(4) <span class="text-danger">*</span></label>
                                                             <div class="col-md-8">
                                                                 <input type="text" name="opt_4[${qCount}][]" prefix="opt_4" value="${question.opt_4}"  class="form-control quesField field" >
                                                             </div>
@@ -306,7 +306,7 @@
                                     <div class="form-group row">
                                             <div class="col-md-12">
                                                 <div class="form-group row">
-                                                    <label class="col-md-2 label-control" for="userinput1">Name</label>
+                                                    <label class="col-md-2 label-control" for="userinput1">Name <span class="text-danger">*</span></label>
                                                     <div class="col-md-8">
                                                         <input type="text" name="${name}"
                                                             class="form-control border-primary name" value="${topic.name}" placeholder="Name" required>
@@ -315,7 +315,7 @@
                                             </div>
                                         </div>
                                         <div class="form-group row">
-                                            <label class="col-md-2 label-control" for="userinput1">Type</label>
+                                            <label class="col-md-2 label-control" for="userinput1">Type <span class="text-danger">*</span></label>
                                             <div class="col-md-8">
                                                 <select name="type" class="form-control typeDropdown" required>
                                                     <option value="">-----Select Type-----</option>
@@ -330,7 +330,7 @@
                                         <div class="row">
                                             <div class="col-md-12 optionTab text ${topic.text != null ? '' : 'd-none'}">
                                                 <div class="form-group row">
-                                                    <label class="col-md-2 label-control" for="userinput1">text</label>
+                                                    <label class="col-md-2 label-control" for="userinput1">text <span class="text-danger">*</span></label>
                                                     <div class="col-md-8">
                                                        <textarea name="text[]" class="form-control field" placeholder="Enter Comma Seprated Links"  rows="5"> ${topic.text != null ? topic.text : ''} </textarea>
                                                     </div>
@@ -338,7 +338,7 @@
                                             </div>
                                             <div class="col-md-12 optionTab videoLink ${topic.videoLink != null ? '' : 'd-none'} ">
                                                 <div class="form-group row">
-                                                    <label class="col-md-2 label-control" for="userinput1">Video Link</label>
+                                                    <label class="col-md-2 label-control" for="userinput1">Video Link <span class="text-danger">*</span></label>
                                                     <div class="col-md-8">
                                                         <input type="text" name="videoLink[]"
                                                             class="form-control border-primary field" value="${topic.videoLink != null ? topic.videoLink : ''}" >
@@ -353,7 +353,7 @@
                                             </div>
                                             <div class="col-md-12 optionTab addressUrl ${topic.addressUrl != null ? '' : 'd-none'}">
                                                 <div class="form-group row">
-                                                    <label class="col-md-2 label-control" for="userinput1">Address Url</label>
+                                                    <label class="col-md-2 label-control" for="userinput1">Address Url <span class="text-danger">*</span></label>
                                                     <div class="col-md-8">
                                                         <input type="text" name="addressUrl[]"
                                                             class="form-control border-primary field" value="${topic.addressUrl != null ? topic.addressUrl : ''}" >
@@ -363,7 +363,7 @@
                                             <div class="col-md-12 optionTab pdf ${topic.pdf != null ? '' : 'd-none'}">
                                             <input type="hidden" value="${topic.pdf != null ? topic.id : ''}" name=prePdf[] class="prePdf" />
                                                 <div class="form-group row">
-                                                    <label class="col-md-2 label-control" for="userinput1">Pdf</label>
+                                                    <label class="col-md-2 label-control" for="userinput1">Pdf <span class="text-danger">*</span></label>
                                                     <div class="col-md-8">
                                                        <input type="file" name="pdf[]" value="" class="form-control pdfField field">
                                                     </div>
@@ -407,7 +407,7 @@
                                     <div class="form-group row">
                                             <div class="col-md-12">
                                                 <div class="form-group row">
-                                                    <label class="col-md-2 label-control" for="userinput1">Name</label>
+                                                    <label class="col-md-2 label-control" for="userinput1">Name <span class="text-danger">*</span></label>
                                                     <div class="col-md-8">
                                                         <input type="text" name="name[]"
                                                             class="form-control border-primary name" placeholder="Name" required>
@@ -416,7 +416,7 @@
                                             </div>
                                         </div>
                                         <div class="form-group row">
-                                            <label class="col-md-2 label-control" for="userinput1">Type</label>
+                                            <label class="col-md-2 label-control" for="userinput1">Type <span class="text-danger">*</span></label>
                                             <div class="col-md-8">
                                                 <select name="type" class="form-control typeDropdown" required>
                                                     <option value="">-----Select Type-----</option>
@@ -431,7 +431,7 @@
                                         <div class="row">
                                             <div class="col-md-12 optionTab videoLink" style="display: none">
                                                 <div class="form-group row">
-                                                    <label class="col-md-2 label-control" for="userinput1">Video Link</label>
+                                                    <label class="col-md-2 label-control" for="userinput1">Video Link <span class="text-danger">*</span></label>
                                                     <div class="col-md-8">
                                                         <input type="text" name="videoLink[]"
                                                             class="form-control border-primary field"  >
@@ -445,7 +445,7 @@
                                                 <div class="row ques" quizNo="${quizQuestionCount}">
                                                     <div class="col-md-12">
                                                         <div class="form-group row">
-                                                            <label class="col-md-2 label-control" for="userinput1">Heading</label>
+                                                            <label class="col-md-2 label-control" for="userinput1">Heading <span class="text-danger">*</span></label>
                                                             <div class="col-md-8">
                                                                 <input type="text" name="heading[${quizQuestionCount}][]" prefix="heading"
                                                                     class="form-control border-primary quesField field" placeholder="Heading" >
@@ -454,7 +454,7 @@
                                                     </div>
                                                     <div class="col-md-12">
                                                         <div class="form-group row">
-                                                            <label class="col-md-2 label-control" for="userinput1">Correct Option</label>
+                                                            <label class="col-md-2 label-control" for="userinput1">Correct Option <span class="text-danger">*</span></label>
                                                             <div class="col-md-8">
                                                                 <select name="c_opt[${quizQuestionCount}][]" prefix="c_opt" class="form-control quesField field" >
                                                                     <option value="">----Select-----</option>
@@ -468,7 +468,7 @@
                                                     </div>
                                                     <div class="col-md-6">
                                                         <div class="form-group row">
-                                                            <label class="col-md-3 label-control" for="userinput1">Option(1)</label>
+                                                            <label class="col-md-3 label-control" for="userinput1">Option(1) <span class="text-danger">*</span></label>
                                                             <div class="col-md-8">
                                                                 <input type="text" name="opt_1[${quizQuestionCount}][]" prefix="opt_1"  class="form-control quesField field" >
                                                             </div>
@@ -476,7 +476,7 @@
                                                     </div>
                                                     <div class="col-md-6">
                                                         <div class="form-group row">
-                                                            <label class="col-md-3 label-control" for="userinput1">Option(2)</label>
+                                                            <label class="col-md-3 label-control" for="userinput1">Option(2) <span class="text-danger">*</span></label>
                                                             <div class="col-md-8">
                                                                 <input type="text" name="opt_2[${quizQuestionCount}][]" prefix="opt_2" class="form-control quesField field" >
                                                             </div>
@@ -484,7 +484,7 @@
                                                     </div>
                                                     <div class="col-md-6">
                                                         <div class="form-group row">
-                                                            <label class="col-md-3 label-control" for="userinput1">Option(3)</label>
+                                                            <label class="col-md-3 label-control" for="userinput1">Option(3) <span class="text-danger">*</span></label>
                                                             <div class="col-md-8">
                                                                 <input type="text" name="opt_3[${quizQuestionCount}][]" prefix="opt_3" class="form-control quesField field" >
                                                             </div>
@@ -492,7 +492,7 @@
                                                     </div>
                                                     <div class="col-md-6">
                                                         <div class="form-group row">
-                                                            <label class="col-md-3 label-control" for="userinput1">Option(4)</label>
+                                                            <label class="col-md-3 label-control" for="userinput1">Option(4) <span class="text-danger">*</span></label>
                                                             <div class="col-md-8">
                                                                 <input type="text" name="opt_4[0][]" prefix="opt_4"  class="form-control quesField field" >
                                                             </div>
@@ -502,7 +502,7 @@
                                             </div>
                                             <div class="col-md-12 optionTab text" style="display: none">
                                                 <div class="form-group row">
-                                                    <label class="col-md-2 label-control" for="userinput1">text</label>
+                                                    <label class="col-md-2 label-control" for="userinput1">text <span class="text-danger">*</span></label>
                                                     <div class="col-md-8">
                                                        <textarea name="text[]" class="form-control field"  rows="5"></textarea>
                                                     </div>
@@ -510,7 +510,7 @@
                                             </div>
                                             <div class="col-md-12 optionTab addressUrl"  style="display: none">
                                                 <div class="form-group row">
-                                                    <label class="col-md-2 label-control" for="userinput1">Address Url</label>
+                                                    <label class="col-md-2 label-control" for="userinput1">Address Url <span class="text-danger">*</span></label>
                                                     <div class="col-md-8">
                                                         <input type="text" name="addressUrl[]"
                                                             class="form-control border-primary field"  >
@@ -519,7 +519,7 @@
                                             </div>
                                             <div class="col-md-12 optionTab pdf" style="display: none">
                                                 <div class="form-group row">
-                                                    <label class="col-md-2 label-control" for="userinput1">Pdf</label>
+                                                    <label class="col-md-2 label-control" for="userinput1">Pdf <span class="text-danger">*</span></label>
                                                     <div class="col-md-8">
                                                        <input type="file" name="pdf[]" class="form-control field">
                                                     </div>
@@ -539,7 +539,7 @@
                                     </div>
                                     <div class="col-md-12">
                                                         <div class="form-group row">
-                                                            <label class="col-md-2 label-control" for="userinput1">Heading</label>
+                                                            <label class="col-md-2 label-control" for="userinput1">Heading <span class="text-danger">*</span></label>
                                                             <div class="col-md-8">
                                                                 <input type="text" name="heading[${quizQuestionCount}][]" prefix="heading"
                                                                     class="form-control border-primary quesField field" placeholder="Heading" required>
@@ -548,7 +548,7 @@
                                                     </div>
                                                     <div class="col-md-12">
                                                         <div class="form-group row">
-                                                            <label class="col-md-2 label-control" for="userinput1">Correct Option</label>
+                                                            <label class="col-md-2 label-control" for="userinput1">Correct Option <span class="text-danger">*</span></label>
                                                             <div class="col-md-8">
                                                                 <select name="c_opt[${quizQuestionCount}][]" prefix="c_opt" class="form-control quesField field" required>
                                                                     <option value="">----Select-----</option>
@@ -562,7 +562,7 @@
                                                     </div>
                                                     <div class="col-md-6">
                                                         <div class="form-group row">
-                                                            <label class="col-md-3 label-control" for="userinput1">Option(1)</label>
+                                                            <label class="col-md-3 label-control" for="userinput1">Option(1) <span class="text-danger">*</span></label>
                                                             <div class="col-md-8">
                                                                 <input type="text" name="opt_1[${quizQuestionCount}][]" prefix="opt_1"  class="form-control quesField field" required>
                                                             </div>
@@ -570,7 +570,7 @@
                                                     </div>
                                                     <div class="col-md-6">
                                                         <div class="form-group row">
-                                                            <label class="col-md-3 label-control" for="userinput1">Option(2)</label>
+                                                            <label class="col-md-3 label-control" for="userinput1">Option(2) <span class="text-danger">*</span></label>
                                                             <div class="col-md-8">
                                                                 <input type="text" name="opt_2[${quizQuestionCount}][]" prefix="opt_2" class="form-control quesField field" required>
                                                             </div>
@@ -578,7 +578,7 @@
                                                     </div>
                                                     <div class="col-md-6">
                                                         <div class="form-group row">
-                                                            <label class="col-md-3 label-control" for="userinput1">Option(3)</label>
+                                                            <label class="col-md-3 label-control" for="userinput1">Option(3) <span class="text-danger">*</span></label>
                                                             <div class="col-md-8">
                                                                 <input type="text" name="opt_3[${quizQuestionCount}][]" prefix="opt_3" class="form-control quesField field" required>
                                                             </div>
@@ -586,7 +586,7 @@
                                                     </div>
                                                     <div class="col-md-6">
                                                         <div class="form-group row">
-                                                            <label class="col-md-3 label-control" for="userinput1">Option(4)</label>
+                                                            <label class="col-md-3 label-control" for="userinput1">Option(4) <span class="text-danger">*</span></label>
                                                             <div class="col-md-8">
                                                                 <input type="text" name="opt_4[${quizQuestionCount}][]" prefix="opt_4"  class="form-control quesField field" required>
                                                             </div>

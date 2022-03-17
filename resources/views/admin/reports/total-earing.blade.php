@@ -30,7 +30,7 @@
                                 <div class="row">
                                     <div class="col-md-5">
                                         <div class="form-group row">
-                                            <label class="col-md-3 label-control" for="userinput1">Start Date</label>
+                                            <label class="col-md-3 label-control" for="userinput1">Start Date <span class="text-danger">*</span></label>
                                             <div class="col-md-9">
                                                 <input type="date" name="start_date"
                                                     class="form-control border-primary" value="" placeholder="Api Key" required>
@@ -39,7 +39,7 @@
                                     </div>
                                     <div class="col-md-5">
                                         <div class="form-group row">
-                                            <label class="col-md-3 label-control" for="userinput1">End Date</label>
+                                            <label class="col-md-3 label-control" for="userinput1">End Date <span class="text-danger">*</span></label>
                                             <div class="col-md-9">
                                                 <input type="date"  name="end_date"
                                                     class="form-control border-primary" value="" placeholder="Api Secret" required>
