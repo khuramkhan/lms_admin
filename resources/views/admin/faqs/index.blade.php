@@ -30,7 +30,7 @@
                                 <div class="row">
                                     <div class="col-md-12">
                                         <div class="form-group row">
-                                            <label class="col-md-2 label-control" for="userinput1">Heading</label>
+                                            <label class="col-md-2 label-control" for="userinput1">Heading <span class="text-danger">*</span></label>
                                             <div class="col-md-8">
                                                 <input type="text" name="heading"
                                                     class="form-control border-primary" value="{{ isset($faqs) ? $faqs->heading : '' }}" placeholder="Heading" required>
@@ -39,7 +39,7 @@
                                     </div>
                                     <div class="col-md-12">
                                         <div class="form-group row">
-                                            <label class="col-md-2 label-control" for="userinput1">Description</label>
+                                            <label class="col-md-2 label-control" for="userinput1">Description <span class="text-danger">*</span></label>
                                             <div class="col-md-8">
                                                 <textarea name="description" class="form-control border-primary summernote" placeholder="Enter Description Here" required>{{ isset($faqs) ? $faqs->description : '' }}</textarea>
                                             </div>

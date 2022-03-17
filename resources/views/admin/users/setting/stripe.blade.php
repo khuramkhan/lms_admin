@@ -30,7 +30,7 @@
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="form-group row">
-                                            <label class="col-md-3 label-control" for="userinput1">Api Key</label>
+                                            <label class="col-md-3 label-control" for="userinput1">Api Key <span class="text-danger">*</span></label>
                                             <div class="col-md-9">
                                                 <input type="text" name="stripe_api_key"
                                                     class="form-control border-primary" value="{{ !empty($api_key) ? $api_key->value : '' }}" placeholder="Api Key" required>
@@ -39,7 +39,7 @@
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group row">
-                                            <label class="col-md-3 label-control" for="userinput1">Api Secret</label>
+                                            <label class="col-md-3 label-control" for="userinput1">Api Secret <span class="text-danger">*</span></label>
                                             <div class="col-md-9">
                                                 <input type="text"  name="stripe_api_secret"
                                                        class="form-control border-primary" value="{{ !empty($api_secret) ? $api_secret->value : '' }}" placeholder="Api Secret"

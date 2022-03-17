@@ -41,7 +41,7 @@
                                                 <div class="row">
                                                     <div class="col-md-12">
                                                         <div class="form-group row">
-                                                            <label class="col-md-2 label-control" for="userinput1" style="text-align: center">Name</label>
+                                                            <label class="col-md-2 label-control" for="userinput1" style="text-align: center">Name <span class="text-danger">*</span></label>
                                                             <div class="col-md-10">
                                                                 <input type="text" name="name"
                                                                     class="form-control border-primary" value="{{ $course->name }}" placeholder="Name" required>
@@ -50,7 +50,7 @@
                                                     </div>
                                                     <div class="col-md-12">
                                                         <div class="form-group row">
-                                                            <label class="col-md-2 label-control" for="userinput1" style="text-align: center">Author</label>
+                                                            <label class="col-md-2 label-control" for="userinput1" style="text-align: center">Author <span class="text-danger">*</span></label>
                                                             <div class="col-md-10">
                                                                 <input type="text"  name="author"
                                                                        class="form-control border-primary" value="{{ $course->author }}" placeholder="Author"
@@ -60,7 +60,7 @@
                                                     </div>
                                                     <div class="col-md-12">
                                                         <div class="form-group row">
-                                                            <label class="col-md-2 label-control" for="userinput3" style="text-align: center">Price</label>
+                                                            <label class="col-md-2 label-control" for="userinput3" style="text-align: center">Price <span class="text-danger">*</span></label>
                                                             <div class="col-md-10">
                                                                 <input type="text" class="form-control border-primary"
                                                                        placeholder="Price" name="price" value="{{ $course->price }}" required>
@@ -73,7 +73,7 @@
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group row">
-                                            <label class="col-md-3 label-control" for="userinput2">Language</label>
+                                            <label class="col-md-3 label-control" for="userinput2">Language <span class="text-danger">*</span></label>
                                             <div class="col-md-9">
                                                 <input type="text" class="form-control border-primary"
                                                        placeholder="Language" name="language" value="{{ $course->language }}" required>
@@ -82,7 +82,7 @@
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group row">
-                                            <label class="col-md-3 label-control" for="userinput1">Valid Till</label>
+                                            <label class="col-md-3 label-control" for="userinput1">Valid Till <span class="text-danger">*</span></label>
                                             <div class="col-md-9">
                                                  <input type="date" class="form-control border-primary"
                                                      name="validTill" value="{{ $course->validTill }}" required>
