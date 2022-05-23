@@ -66,10 +66,10 @@
                 <div class="modal-body">
                     <div class="alert alert-success" id="successAlert" style="display: none"></div>
                     <div class="alert alert-danger" id="dangerAlert" style="display: none"></div>
-                    <div class="row"> 
+                    <div class="row">
                         <div class="col-md-12">
                             <div class="form-group row">
-                                <label class="col-md-12 label-control" for="userinput1">Message</label>
+                                <label class="col-md-12 label-control" for="userinput1">Message <span class="text-danger">*</span></label>
                                 <div class="col-md-12">
                                     <textarea name="message" id="message" class="form-control border-primary summernote" placeholder="Enter Description Here" required></textarea>
                                 </div>
@@ -88,7 +88,7 @@
     <script>
         window.addEventListener('load',function(){
             var email = '';
-            $('.action').on('change',function () {  
+            $('.action').on('change',function () {
                 let selectedOption = $(this).find('option:selected');
                 if($(this).val() == 'response'){
                     email = selectedOption.attr('email');
