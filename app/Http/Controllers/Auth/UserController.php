@@ -16,6 +16,9 @@ use PhpParser\Node\Expr\FuncCall;
 
 class UserController extends Controller
 {
+    public function sendTestingEmail(Reequest $req) {
+        sendMail($req->email,'Order received','Your order received successfully, Order will be delivered on your address');
+    }
     public function register(Request $request)
     {
         $validate = Validator::make($request->all(),[
