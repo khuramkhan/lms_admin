@@ -16,11 +16,11 @@ use PhpParser\Node\Expr\FuncCall;
 
 class UserController extends Controller
 {
-    public function sendTestingEmail(Reequest $req) {
+    public function sendTestingEmail(Request $req) {
+        sendMail($req->email,'Order received','Your order received successfully, Order will be delivered on your address');
         return response()->json([
             'success' => true,
         ]);
-//        sendMail($eq->email,'Order received','Your order received successfully, Order will be delivered on your address');
     }
     public function register(Request $request)
     {
